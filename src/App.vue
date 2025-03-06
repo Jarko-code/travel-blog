@@ -1,85 +1,36 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <RouterLink to="/">Home</RouterLink>
+  <RouterLink to="/about">About</RouterLink>
 
   <RouterView />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script setup>
+//imports
+import { watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ROUTE_NAMES } from '@/router/routeNames'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+//constans and variables
+const route = useRoute()
+const router = useRouter()
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
+// functions
+const setDocumentTitle = (newTitle) => (document.title = newTitle)
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+watch(
+  [route],
+  async () => {
+    await router.isReady()
+    if (route.name === ROUTE_NAMES.homePage) {
+      setDocumentTitle(`Home`)
+    }
+    if (route.name === ROUTE_NAMES.aboutPage) {
+      setDocumentTitle(`About`)
+    }
+  },
+  { immediate: true, deep: true },
+)
+</script>
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+<style lang="scss"></style>
