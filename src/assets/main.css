@@ -1,1 +1,21 @@
 @import 'tailwindcss';
+
+:root {
+  --color-danger: #ef4444;
+  --color-white: #fff;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Montserrat, sans-serif;
+}
+
+.router-link-active,
+.router-link-exact-active {
+  color: var(--color-danger);
+}
+
+.active {
+  color: var(--color-white) !important;
+}

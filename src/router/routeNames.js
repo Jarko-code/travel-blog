@@ -1,4 +1,9 @@
 export const ROUTE_NAMES = {
-  homePage: 'homePage',
-  aboutPage: 'aboutPage',
+  homePage: '/',
+  aboutPage: 'about',
+  blogPage: 'blog',
+  eventsPage: 'events',
+  galleryPage: 'gallery',
+  contactPage: 'contact',
+  loginPage: 'login',
 }

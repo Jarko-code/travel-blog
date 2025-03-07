@@ -1,5 +1,5 @@
 <template>
-  <div>home</div>
+  <div>Events</div>
 </template>
 
 <script setup></script>

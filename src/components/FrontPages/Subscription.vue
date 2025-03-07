@@ -1,5 +1,5 @@
 <template>
-  <div>home</div>
+  <div>Subscription</div>
 </template>
 
 <script setup></script>

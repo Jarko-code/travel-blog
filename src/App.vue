@@ -1,7 +1,9 @@
 <template>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
-
+  <Hero>
+    <template #subscription>
+      <Subscription />
+    </template>
+  </Hero>
   <RouterView />
 </template>
 
@@ -19,17 +21,24 @@ const router = useRouter()
 const setDocumentTitle = (newTitle) => (document.title = newTitle)
 
 watch(
-  [route],
-  async () => {
+  () => route.name,
+  async (newRoute) => {
     await router.isReady()
-    if (route.name === ROUTE_NAMES.homePage) {
-      setDocumentTitle(`Home`)
+
+    const routeTitles = {
+      [ROUTE_NAMES.homePage]: 'Home',
+      [ROUTE_NAMES.blogPage]: 'Blog',
+      [ROUTE_NAMES.eventsPage]: 'Events',
+      [ROUTE_NAMES.galleryPage]: 'Gallery',
+      [ROUTE_NAMES.contactPage]: 'Contact',
+      [ROUTE_NAMES.loginPage]: 'Login',
     }
-    if (route.name === ROUTE_NAMES.aboutPage) {
-      setDocumentTitle(`About`)
+
+    if (newRoute in routeTitles) {
+      setDocumentTitle(routeTitles[newRoute])
     }
   },
-  { immediate: true, deep: true },
+  { immediate: true },
 )
 </script>
 
