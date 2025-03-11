@@ -1,5 +1,5 @@
 <template>
-  <div>Subscription</div>
+  <div class="pl-[100px]">Subscription</div>
 </template>
 
 <script setup></script>

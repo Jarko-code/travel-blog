@@ -16,6 +16,10 @@ body {
   color: var(--color-danger);
 }
 
+.text-red {
+  color: var(--color-danger);
+}
+
 .active {
   color: var(--color-white) !important;
 }

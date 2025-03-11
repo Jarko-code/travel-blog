@@ -1,10 +1,13 @@
 <template>
+  <Toast />
   <Hero>
     <template #subscription>
       <Subscription />
     </template>
   </Hero>
-  <RouterView />
+  <div class="px-[100px]">
+    <RouterView />
+  </div>
 </template>
 
 <script setup>
