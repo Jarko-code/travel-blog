@@ -16,7 +16,7 @@ import { watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ROUTE_NAMES } from '@/router/routeNames'
 
-//constans and variables
+//constants and variables
 const route = useRoute()
 const router = useRouter()
 
