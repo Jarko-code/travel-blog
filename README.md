@@ -1,35 +1,25 @@
-# package.json
+## Deploy project
 
-This template should help get you started developing with Vue 3 in Vite.
+git clone https://github.com/Jarko-code/travel-blog.git
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
 
-### Compile and Minify for Production
+## For server deploy
 
-```sh
-npm run build
-```
+cd server
+npm install
+npm install -g nodemon
 
-### Lint with [ESLint](https://eslint.org/)
+download and install https://www.mongodb.com/try/download/shell,
+open compass -> add new connection -> change URI field to mongodb://localhost:27017 and name field to travel-blog -> save&connect - you should see connected DB
 
-```sh
-npm run lint
-```
+nodemon app.js
+
+## DB test
+
+install this extension for Visual studio code https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode
+
+register or login, it`s free
+
+ask me for invitation and you will get API tests
