@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from '@/router/routes'
+import { useAuthStore } from '@/stores/authStore'
+import { ROUTE_NAMES } from '@/router/routeNames'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +19,24 @@ const router = createRouter({
       document.getElementById('app').scrollIntoView({ behavior: 'smooth' })
     }
   },
+})
+
+router.beforeEach((to) => {
+  //navigations guards
+  const publicPage = ['/login', '/']
+  const authRequired = !publicPage.includes(to.path)
+  const authStore = useAuthStore()
+
+  if (to.meta.requiresAuth) {
+    if (!authStore.user && authRequired) {
+      return { name: ROUTE_NAMES.loginPage }
+    }
+  }
+  if (to.meta.guest) {
+    if (authStore.user && publicPage) {
+      return { name: ROUTE_NAMES.dashboardPage }
+    }
+  }
 })
 
 export default router

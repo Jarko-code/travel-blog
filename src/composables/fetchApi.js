@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from '@/stores/authStore'
 
 export const fetchApi = {
   get: request('GET'),
@@ -8,7 +8,7 @@ export const fetchApi = {
 }
 
 function request(method) {
-  return (url, body) => {
+  return async (url, body) => {
     const requestOptions = {
       method,
       headers: authHeader(url),
@@ -17,7 +17,8 @@ function request(method) {
       requestOptions.headers['Content-Type'] = 'application/json'
       requestOptions.body = JSON.stringify(body)
     }
-    return fetch(url, requestOptions).then(handleResponse)
+    const response = await fetch(url, requestOptions)
+    return handleResponse(response)
   }
 }
 
@@ -25,7 +26,7 @@ function authHeader(url) {
   // return auth header with jwt if user is logged in and request is to the api url
   const { user } = useAuthStore()
   const isLoggedIn = !!user?.token
-  const isApiUrl = url.startsWith(import.meta.env.VITE_URL)
+  const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL)
   if (isLoggedIn && isApiUrl) {
     return { Authorization: `Bearer ${user.token}` }
   } else {

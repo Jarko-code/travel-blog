@@ -37,6 +37,20 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Login Page" */ '@/views/FrontPages/LoginPage.vue'),
   },
+  {
+    path: '/admin',
+    name: ROUTE_NAMES.adminPage,
+    meta: { requiresAuth: true },
+    component: () => import(/* webpackChunkName: "Admin Page" */ '@/views/BackPages/AdminPage.vue'),
+    children: [
+      {
+        path: 'dashboard',
+        name: ROUTE_NAMES.dashboardPage,
+        component: () =>
+          import(/* webpackChunkName: "Dashboard Page" */ '@/views/BackPages/DashboardPage.vue'),
+      },
+    ],
+  },
 ]
 
 export default routes

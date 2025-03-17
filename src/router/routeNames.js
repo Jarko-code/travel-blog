@@ -6,4 +6,6 @@ export const ROUTE_NAMES = {
   galleryPage: 'gallery',
   contactPage: 'contact',
   loginPage: 'login',
+  adminPage: 'admin',
+  dashboardPage: 'dashboard',
 }

@@ -37,6 +37,10 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body
 
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' })
+  }
+
   try {
     const user = await User.findOne({ email })
     if (!user) return res.status(400).json({ message: 'Invalid email' })
@@ -55,11 +59,27 @@ router.post('/login', async (req, res) => {
 router.get('/me', async (req, res) => {
   try {
     const token = req.headers['authorization']
+    console.log(token)
     if (!token) return res.status(401).json({ message: 'Unauthorized' })
 
     const decoded = jwt.verify(token, JWT_SECRET)
     const user = await User.findById(decoded.id).select('-password')
     res.json(user)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+const tokenBlacklist = new Set()
+
+// Logout User
+router.post('/logout', (req, res) => {
+  try {
+    const token = req.headers['authorization']
+    if (!token) return res.status(400).json({ message: 'No token provided' })
+
+    tokenBlacklist.add(token) // Add token to blacklist
+    res.json({ message: 'Logged out successfully' })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
