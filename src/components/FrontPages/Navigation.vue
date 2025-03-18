@@ -14,7 +14,7 @@
       <div>
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.homePage">Home</RouterLink>
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.blogPage">Blog</RouterLink>
-        <RouterLink class="px-2.5" :to="ROUTE_NAMES.eventsPage">Events</RouterLink>
+        <RouterLink class="px-2.5" :to="ROUTE_NAMES.eventPage">Events</RouterLink>
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.galleryPage">Gallery</RouterLink>
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.contactPage">Contact</RouterLink>
         <template v-if="route.name !== ROUTE_NAMES.loginPage">

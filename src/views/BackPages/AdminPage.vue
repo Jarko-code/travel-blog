@@ -1,8 +1,9 @@
 <template>
-  <div>Admin</div>
-  <RouterView />
+  <div class="layout">
+    <AdminHeader />
+    <AdminMenu />
+    <AdminContent />
+  </div>
 </template>
 
 <script setup></script>
-
-<style lang="scss" scoped></style>

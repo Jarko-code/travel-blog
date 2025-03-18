@@ -1,5 +1,5 @@
 <template>
-  <div>Dashboard</div>
+  <div>categories</div>
 </template>
 
 <script setup></script>

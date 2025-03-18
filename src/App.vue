@@ -5,7 +5,7 @@
       <Subscription />
     </template>
   </Hero>
-  <div class="px-[100px]">
+  <div :class="route.meta.requiresAuth ? '' : 'px-[100px]'">
     <RouterView />
   </div>
 </template>

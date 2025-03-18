@@ -14,10 +14,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "Blog Page" */ '@/views/FrontPages/BlogPage.vue'),
   },
   {
-    path: '/events',
-    name: ROUTE_NAMES.eventsPage,
+    path: '/event',
+    name: ROUTE_NAMES.eventPage,
     component: () =>
-      import(/* webpackChunkName: "Events Page" */ '@/views/FrontPages/EventsPage.vue'),
+      import(/* webpackChunkName: "Event Page" */ '@/views/FrontPages/EventPage.vue'),
   },
   {
     path: '/gallery',
@@ -48,6 +48,56 @@ const routes = [
         name: ROUTE_NAMES.dashboardPage,
         component: () =>
           import(/* webpackChunkName: "Dashboard Page" */ '@/views/BackPages/DashboardPage.vue'),
+      },
+      {
+        path: 'articles',
+        name: ROUTE_NAMES.articlesPage,
+        component: () =>
+          import(/* webpackChunkName: "Articles Page" */ '@/views/BackPages/ArticlesPage.vue'),
+      },
+      {
+        path: 'events',
+        name: ROUTE_NAMES.eventsPage,
+        component: () =>
+          import(/* webpackChunkName: "Events Page" */ '@/views/BackPages/EventsPage.vue'),
+      },
+      {
+        path: 'tags',
+        name: ROUTE_NAMES.tagsPage,
+        component: () =>
+          import(/* webpackChunkName: "Tags Page" */ '@/views/BackPages/TagsPage.vue'),
+      },
+      {
+        path: 'categories',
+        name: ROUTE_NAMES.categoriesPage,
+        component: () =>
+          import(/* webpackChunkName: "Categories Page" */ '@/views/BackPages/CategoriesPage.vue'),
+      },
+      {
+        path: 'users',
+        name: ROUTE_NAMES.usersPage,
+        component: () =>
+          import(/* webpackChunkName: "Users Page" */ '@/views/BackPages/UsersPage.vue'),
+      },
+      {
+        path: 'images',
+        name: ROUTE_NAMES.imagesPage,
+        component: () =>
+          import(/* webpackChunkName: "Images Page" */ '@/views/BackPages/ImagesPage.vue'),
+      },
+      {
+        path: 'subscriptions',
+        name: ROUTE_NAMES.subscriptionsPage,
+        component: () =>
+          import(
+            /* webpackChunkName: "Subscriptions Page" */ '@/views/BackPages/SubscriptionsPage.vue'
+          ),
+      },
+      {
+        path: 'settings',
+        name: ROUTE_NAMES.settingsPage,
+        component: () =>
+          import(/* webpackChunkName: "Settings Page" */ '@/views/BackPages/SettingsPage.vue'),
       },
     ],
   },
