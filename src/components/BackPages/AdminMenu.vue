@@ -19,9 +19,10 @@
 </template>
 
 <script setup>
-import { MENU_ROUTES } from '@/data/menuRoutes'
+import { useMenuRoutes } from '@/data/menuRoutes'
 import { useRoute } from 'vue-router'
 
+const { MENU_ROUTES } = useMenuRoutes()
 const route = useRoute()
 </script>
 

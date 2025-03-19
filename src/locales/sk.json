@@ -1,0 +1,18 @@
+{
+  "admin": {
+    "documentTitle": {
+      "dashboard": "Dashboard",
+      "articles": "Články",
+      "events": "Udalosti",
+      "tags": "Tagy",
+      "categories": "Kategórie",
+      "users": "Užívatelia",
+      "images": "Obrázky",
+      "subscribers": "Odberatelia",
+      "settingsAndProfile": "Nastavenia a profil"
+    },
+    "adminLayout": {
+      "logout": "Odhlasiť sa"
+    }
+  }
+}

@@ -7,10 +7,11 @@
       </div>
     </RouterLink>
     <div class="flex items-center">
+      <LanguageSwitcher />
       <div class="mr-4">{{ username }}</div>
       <Button
         @click="logout"
-        label="Logout"
+        :label="t('admin.adminLayout.logout')"
         icon="pi pi-sign-out"
         variant="text"
         severity="danger"
@@ -23,9 +24,11 @@
 import { ROUTE_NAMES } from '@/router/routeNames'
 import { useAuthStore } from '@/stores/authStore'
 import { useAlertStore } from '@/stores/alertStore'
+import { useI18n } from 'vue-i18n'
 
 const authStore = useAuthStore()
 const alert = useAlertStore()
+const { t } = useI18n()
 
 const {
   user: {

@@ -11,38 +11,48 @@
 </template>
 
 <script setup>
-//imports
 import { watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ROUTE_NAMES } from '@/router/routeNames'
 
-//constants and variables
+// Constants and variables
 const route = useRoute()
 const router = useRouter()
+const { t, locale } = useI18n()
 
-// functions
-const setDocumentTitle = (newTitle) => (document.title = newTitle)
+// Helper function to update document title
+const updateDocumentTitle = () => {
+  const titles = {
+    [ROUTE_NAMES.homePage]: 'Home',
+    [ROUTE_NAMES.blogPage]: 'Blog',
+    [ROUTE_NAMES.eventPage]: 'Events',
+    [ROUTE_NAMES.galleryPage]: 'Gallery',
+    [ROUTE_NAMES.contactPage]: 'Contact',
+    [ROUTE_NAMES.loginPage]: 'Login',
+    [ROUTE_NAMES.dashboardPage]: `Admin | ${t('admin.documentTitle.dashboard')}`,
+    [ROUTE_NAMES.articlesPage]: `Admin | ${t('admin.documentTitle.articles')}`,
+    [ROUTE_NAMES.eventsPage]: `Admin | ${t('admin.documentTitle.events')}`,
+    [ROUTE_NAMES.tagsPage]: `Admin | ${t('admin.documentTitle.tags')}`,
+    [ROUTE_NAMES.categoriesPage]: `Admin | ${t('admin.documentTitle.categories')}`,
+    [ROUTE_NAMES.usersPage]: `Admin | ${t('admin.documentTitle.users')}`,
+    [ROUTE_NAMES.imagesPage]: `Admin | ${t('admin.documentTitle.images')}`,
+    [ROUTE_NAMES.subscriptionsPage]: `Admin | ${t('admin.documentTitle.subscribers')}`,
+    [ROUTE_NAMES.settingsPage]: `Admin | ${t('admin.documentTitle.settingsAndProfile')}`,
+  }
 
+  if (titles[route.name]) {
+    document.title = `${titles[route.name]}`
+  }
+}
+
+// Watch for changes in locale or route and update the title
 watch(
-  () => route.name,
-  async (newRoute) => {
+  [locale, route],
+  async () => {
     await router.isReady()
-
-    const routeTitles = {
-      [ROUTE_NAMES.homePage]: 'Home',
-      [ROUTE_NAMES.blogPage]: 'Blog',
-      [ROUTE_NAMES.eventsPage]: 'Events',
-      [ROUTE_NAMES.galleryPage]: 'Gallery',
-      [ROUTE_NAMES.contactPage]: 'Contact',
-      [ROUTE_NAMES.loginPage]: 'Login',
-    }
-
-    if (newRoute in routeTitles) {
-      setDocumentTitle(routeTitles[newRoute])
-    }
+    updateDocumentTitle()
   },
-  { immediate: true },
+  { immediate: true, deep: true },
 )
 </script>
-
-<style lang="scss"></style>

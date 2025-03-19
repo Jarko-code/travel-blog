@@ -1,0 +1,18 @@
+{
+  "admin": {
+    "documentTitle": {
+      "dashboard": "Dashboard",
+      "articles": "Articles",
+      "events": "Events",
+      "tags": "Tags",
+      "categories": "Categories",
+      "users": "Users",
+      "images": "Images",
+      "subscribers": "Subscribers",
+      "settingsAndProfile": "Settings and profile"
+    },
+    "adminLayout": {
+      "logout": "Logout"
+    }
+  }
+}
