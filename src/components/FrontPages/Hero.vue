@@ -1,11 +1,12 @@
 <template>
     <div
       v-if="route.meta.requiresAuth !== true"
-      class="bg-[url('../assets/images/bg.jpg')] h-screen bg-cover bg-black/30 bg-blend-overlay text-white flex items-start"
+      class="bg-[url('../assets/images/bg.jpg')] h-screen bg-cover bg-black/30 bg-blend-overlay text-white flex flex-col items-start"
     >
       <Navigation />
        <div
         id="header-subscription"
+        class="my-auto"
         v-if="route.name === '/'"
        >
         <slot name="header"></slot>
