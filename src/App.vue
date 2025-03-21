@@ -1,6 +1,9 @@
 <template>
   <Toast />
   <Hero>
+    <template #header>
+      <Header />
+    </template>
     <template #subscription>
       <Subscription />
     </template>
