@@ -2,7 +2,10 @@
   <Toast />
   <Hero>
     <template #header>
-      <Header title="This is Header component in Hero component"/>
+      <Header
+        mainTitle="Get a membership and explore the world"
+        secondaryTitle="Subscribe and get the latest information's about our activities."
+      />
     </template>
     <template #subscription>
       <Subscription />
