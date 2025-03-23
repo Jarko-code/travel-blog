@@ -6,7 +6,7 @@
       <Navigation />
        <div
         id="header-subscription"
-        class="my-auto"
+        class="my-auto mr-[46vw] ml-[8vw]"
         v-if="route.name === ROUTE_NAMES.homePage"
        >
         <slot name="header"></slot>

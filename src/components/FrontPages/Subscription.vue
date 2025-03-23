@@ -1,5 +1,4 @@
 <template>
-  <div class="pl-[100px]">
     <p>Subscribe and get the latest information's about our activities.</p>
 
     <form @submit.prevent="sendSubscribeForm">
@@ -15,8 +14,6 @@
         <Button label="Subscribe" />
       </div>
     </form>
-
-  </div>
 
 </template>
 

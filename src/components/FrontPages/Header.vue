@@ -1,5 +1,5 @@
 <template>
-  <div class="leading-none pl-[100px]">
+  <div class="leading-none">
     <div class="font-semibold text-[1.125rem] mb-12">{{ props.secondaryTitle }}</div>
     <div class="font-bold text-[2.5rem]">{{ props.mainTitle }}</div>
   </div>
