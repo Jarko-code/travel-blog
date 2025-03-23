@@ -4,7 +4,7 @@
     <template #header>
       <Header
         mainTitle="Get a membership and explore the world"
-        secondaryTitle="Subscribe and get the latest information's about our activities."
+        secondaryTitle="Welcome to our Travel blog!"
       />
     </template>
     <template #subscription>

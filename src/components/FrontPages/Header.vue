@@ -1,6 +1,6 @@
 <template>
-  <div class="pl-[100px]">{{ props.mainTitle }}</div>
   <div class="pl-[100px]">{{ props.secondaryTitle }}</div>
+  <div class="pl-[100px]">{{ props.mainTitle }}</div>
 </template>
 
 <script setup>
