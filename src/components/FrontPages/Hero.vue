@@ -7,7 +7,7 @@
        <div
         id="header-subscription"
         class="my-auto"
-        v-if="route.name === '/'"
+        v-if="route.name === ROUTE_NAMES.homePage"
        >
         <slot name="header"></slot>
         <slot name="subscription"></slot>
@@ -17,7 +17,7 @@
 
 <script setup>
 import { useRoute} from 'vue-router'
-
+import { ROUTE_NAMES } from '@/router/routeNames';
 const route = useRoute()
 </script>
 
