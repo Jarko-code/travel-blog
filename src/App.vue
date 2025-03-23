@@ -2,7 +2,7 @@
   <Toast />
   <Hero>
     <template #header>
-      <Header />
+      <Header title="This is Header component in Hero component"/>
     </template>
     <template #subscription>
       <Subscription />
