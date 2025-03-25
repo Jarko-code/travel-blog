@@ -1,12 +1,13 @@
 <template>
-    <p class="font-bold text-[1.125rem] leading-none">Subscribe and get the latest information's about our activities.</p>
+  <div class="mt-11">
+    <p class="font-bold text-[1.125rem] mb-[1.4rem] leading-none">Subscribe and get the latest information's about our activities.</p>
 
     <form @submit.prevent="sendSubscribeForm">
       <div id="text-inputs" >
         <InputText type="text" v-model="firstName" placeholder="First name" style="font-size: 0.875rem;"/>
         <InputText type="text" v-model="firstName" placeholder="Email" style="font-size: 0.875rem;" />
       </div>
-      <div id="subscription-bottom">
+      <div id="subscription-bottom" class="mt-8">
         <Checkbox v-model="checked" binary />
         <span class="text-sm">
           I consent to my personal information being processed in accordance with The Broke Backpacker’s <span class="font-bold text-red-500">Privacy Policy</span>
@@ -18,7 +19,7 @@
         />
       </div>
     </form>
-
+  </div>
 </template>
 
 <script setup></script>
