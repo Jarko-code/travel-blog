@@ -17,9 +17,14 @@
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.eventPage">Events</RouterLink>
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.galleryPage">Gallery</RouterLink>
         <RouterLink class="px-2.5" :to="ROUTE_NAMES.contactPage">Contact</RouterLink>
-        <template v-if="route.name !== ROUTE_NAMES.loginPage">
+        <template v-if="route.name !== ROUTE_NAMES.loginPage && !isLoggedIn">
           <RouterLink class="px-2.5" :to="ROUTE_NAMES.loginPage">
             <Button label="Login" severity="danger" />
+          </RouterLink>
+        </template>
+        <template v-else-if="route.name !== ROUTE_NAMES.loginPage">
+          <RouterLink class="px-2.5" :to="`admin/${ROUTE_NAMES.dashboardPage}`">
+            <Button label="Dashboard" severity="danger" />
           </RouterLink>
         </template>
       </div>
@@ -35,11 +40,16 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ROUTE_NAMES } from '@/router/routeNames'
+import { useAuthStore } from '@/stores/authStore'
 
 const route = useRoute()
 const router = useRouter()
+const authStore = useAuthStore()
+
+const isLoggedIn = computed(() => !!authStore.user) // Check if user exists
 </script>
 
 <style lang="scss"></style>
