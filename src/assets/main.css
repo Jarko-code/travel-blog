@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+@theme {
+  --breakpoint-sm: 10rem;
+}
 
 :root {
   --color-danger: #ef4444;

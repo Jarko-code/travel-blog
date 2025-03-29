@@ -1,5 +1,5 @@
 <template>
-  <main class="main px-4 pb-4 pt-14">
+  <main class="main px-4 pb-5 pt-5 sm:ml-[-160px] lg:ml-[0px]">
     <RouterView />
   </main>
 </template>
