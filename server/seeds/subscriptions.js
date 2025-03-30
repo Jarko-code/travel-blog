@@ -11,20 +11,23 @@ async function seedSubscriptions() {
     await connectDB()
     await Subscription.deleteMany({})
 
+    // Create an array of promises
+    const subscriptionPromises = []
+
     for (let i = 0; i < 200; i++) {
       const newSubscription = new Subscription({
         firstName: faker.person.firstName(),
         email: faker.internet.email(),
       })
-
-      await newSubscription.save()
+      subscriptionPromises.push(newSubscription.save()) // Collect promises
     }
 
+    await Promise.all(subscriptionPromises) // Wait for all to complete
     console.log('Database seeded successfully!')
   } catch (err) {
     console.error('Error seeding database:', err)
   } finally {
-    mongoose.disconnect()
+    await mongoose.disconnect() // Ensure disconnection happens after all operations
   }
 }
 

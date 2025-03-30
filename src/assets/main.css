@@ -54,7 +54,7 @@ body {
   }
   .main {
     grid-area: content;
-    height: 100vh;
+    height: 94vh;
   }
 }
 
