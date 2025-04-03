@@ -94,6 +94,14 @@ const routes = [
           ),
       },
       {
+        path: 'subscriptions/new-email-post',
+        name: ROUTE_NAMES.newEmailPost,
+        component: () =>
+          import(
+            /* webpackChunkName: "Subscriptions Page" */ '@/views/BackPages/NewEmailPostPage.vue'
+          ),
+      },
+      {
         path: 'settings',
         name: ROUTE_NAMES.settingsPage,
         component: () =>

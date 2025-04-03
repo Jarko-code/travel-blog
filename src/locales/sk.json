@@ -13,6 +13,21 @@
     },
     "adminLayout": {
       "logout": "Odhlasiť sa"
+    },
+    "subscription": {
+      "newPostButton": "Výtvoriť nový email",
+      "name": "Meno",
+      "email": "Email",
+      "sendEmail": "Poslať Email",
+      "actions": "Akcie",
+      "deleteMessage": "Chcete vymazať tento záznam?",
+      "deleteHeader": "Nebezpečná zóna",
+      "deleteCancel": "Zrušiť",
+      "delete": "Vymazať",
+      "removed": "Položka vymazaná",
+      "removedMessage": "Položka úspešne vymazaná",
+      "rejected": "Zrušené",
+      "rejectedMessage": "Operácia zrušená"
     }
   }
 }
