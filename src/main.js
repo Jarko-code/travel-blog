@@ -7,6 +7,7 @@ import PrimeVue from 'primevue/config'
 
 import ToastService from 'primevue/toastservice'
 import { theme } from './assets/themes/themes'
+import ConfirmationService from 'primevue/confirmationservice'
 
 import App from './App.vue'
 import router from './router'
@@ -18,6 +19,7 @@ app.use(createPinia())
 app.use(router)
 app.use(ToastService)
 app.use(i18n)
+app.use(ConfirmationService)
 
 app.use(PrimeVue, {
   theme: {

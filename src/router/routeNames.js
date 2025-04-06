@@ -16,4 +16,5 @@ export const ROUTE_NAMES = {
   imagesPage: 'images',
   subscriptionsPage: 'subscriptions',
   settingsPage: 'settings',
+  newEmailPost: 'new-email-post',
 }

@@ -5,6 +5,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const authRoutes = require('./routes/auth')
+const subscriptionRoutes = require('./routes/subscription')
 
 dotenv.config() // Load environment variables
 connectDB()
@@ -25,5 +26,6 @@ app.post('/test-body', (req, res) => {
   res.json({ received: req.body })
 })
 app.use('/api/auth', authRoutes)
+app.use('/api', subscriptionRoutes)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

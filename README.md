@@ -23,3 +23,10 @@ install this extension for Visual studio code https://marketplace.visualstudio.c
 register or login, it`s free
 
 ask me for invitation and you will get API tests
+
+## Seeds
+
+if you want to seed the DB, go to seed folder and you have two options
+
+1. run node <file.js> to seed to specific DB table
+2. run node seed.js to seed to all DB tables

@@ -27,7 +27,20 @@ export const useAuthStore = defineStore('auth', {
         router.push({ name: ROUTE_NAMES.dashboardPage })
       } catch (error) {
         const alert = useAlertStore()
-        alert.error(`Internal server error ${error}`)
+
+        if (error.response) {
+          const { status } = error.response
+
+          if (status === 400) {
+            alert.error('Invalid Request', 'Please check your input and try again')
+          } else if (status === 401) {
+            alert.error('Unauthorized', 'Incorrect email or password')
+          } else {
+            alert.error('Login failed', 'Unexpected error occurred')
+          }
+        } else {
+          alert.error('Login failed', 'Network error or server is unreachable')
+        }
       }
     },
 
