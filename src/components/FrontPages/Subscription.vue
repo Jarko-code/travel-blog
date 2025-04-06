@@ -7,7 +7,7 @@
     <form @submit.prevent="sendSubscribeForm" class="text-sm">
       <div id="text-inputs" class="flex gap-x-6">
         <InputText type="text" v-model="firstName" placeholder="First name" class="w-full"/>
-        <InputText type="text" v-model="firstName" placeholder="Email" class="w-full"/>
+        <InputText type="text" v-model="email" placeholder="Email" class="w-full"/>
       </div>
       <div id="subscription-bottom" class="flex mt-8">
         <Checkbox
