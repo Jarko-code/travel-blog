@@ -1,6 +1,8 @@
 <template>
   <div class="mt-11">
-    <p class="font-bold text-[1.125rem] mb-[1.4rem] leading-none">Subscribe and get the latest information's about our activities.</p>
+    <p class="font-bold text-[1.125rem] mb-[1.4rem] leading-none">
+      Subscribe and get the latest information's about our activities.
+    </p>
 
     <form @submit.prevent="sendSubscribeForm" class="text-sm">
       <div id="text-inputs" class="flex gap-x-6">
@@ -15,7 +17,10 @@
           class="self-center mr-3"
         />
         <span class="w-full">
-          I consent to my personal information being processed in accordance with The Broke Backpacker’s <span class="font-bold text-red-500">Privacy Policy</span>
+          I consent to my personal information being processed in accordance with The Broke Backpacker’s 
+          <span class="font-bold text-red-500">
+            Privacy Policy
+          </span>
         </span>
         <Button
           label="Subscribe"
