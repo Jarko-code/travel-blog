@@ -98,7 +98,7 @@ onUnmounted(() => {
 }
 
 img {
-  width: 21px !important;
+  width: 21px;
   height: auto;
 }
 .rotatedown {
