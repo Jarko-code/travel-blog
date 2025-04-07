@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex">
+  <div class="relative flex w-full">
     <!-- Left Content (Navigation + Logo) -->
     <div
       class="flex-1 py-5 px-[100px] text-white flex items-center justify-between"

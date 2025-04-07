@@ -1,6 +1,12 @@
 <template>
   <Toast />
   <Hero>
+    <template #header>
+      <Header
+        mainTitle="Get a membership and explore the world"
+        secondaryTitle="Welcome to our Travel blog!"
+      />
+    </template>
     <template #subscription>
       <Subscription />
     </template>
