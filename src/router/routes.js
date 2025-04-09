@@ -107,7 +107,19 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "Settings Page" */ '@/views/BackPages/SettingsPage.vue'),
       },
+      {
+        path: ':pathMatch(.*)*',
+        name: ROUTE_NAMES.notFoundCms,
+        component: () =>
+          import(/* webpackChunkName: "Settings Page" */ '@/views/BackPages/NotFound.vue'),
+      },
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: ROUTE_NAMES.notFoundPublic,
+    component: () =>
+      import(/* webpackChunkName: "Settings Page" */ '@/views/FrontPages/NotFoundPublic.vue'),
   },
 ]
 

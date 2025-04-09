@@ -68,7 +68,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .language-switcher {
   display: flex;
   align-items: center;

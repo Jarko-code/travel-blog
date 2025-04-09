@@ -9,7 +9,12 @@
       "users": "Užívatelia",
       "images": "Obrázky",
       "subscribers": "Odberatelia",
+      "newEmailPost": "Nový email",
       "settingsAndProfile": "Nastavenia a profil"
+    },
+    "default": {
+      "notFoundButton": "Späť na predchádzjúcu stránku",
+      "notFound": "Stránka nenájdená!"
     },
     "adminLayout": {
       "logout": "Odhlasiť sa"

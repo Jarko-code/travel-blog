@@ -6,6 +6,7 @@ export const ROUTE_NAMES = {
   galleryPage: 'gallery',
   contactPage: 'contact',
   loginPage: 'login',
+  notFoundPublic: 'not-found',
   adminPage: 'admin',
   dashboardPage: 'dashboard',
   articlesPage: 'articles',
@@ -16,5 +17,6 @@ export const ROUTE_NAMES = {
   imagesPage: 'images',
   subscriptionsPage: 'subscriptions',
   settingsPage: 'settings',
+  notFoundCms: 'item-not-found',
   newEmailPost: 'new-email-post',
 }

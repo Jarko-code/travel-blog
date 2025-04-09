@@ -12,6 +12,10 @@
       "newEmailPost": "New email post",
       "settingsAndProfile": "Settings and profile"
     },
+    "default": {
+      "notFoundButton": "Back to previous page",
+      "notFound": "Page not found!"
+    },
     "adminLayout": {
       "logout": "Logout"
     },
