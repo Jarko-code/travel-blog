@@ -91,14 +91,14 @@ const routes = [
       {
         path: ':pathMatch(.*)*',
         name: ROUTE_NAMES.notFoundCms,
-        component: () => import('@/views/BackPages/NotFound.vue'),
+        component: () => import('@/views/BackPages/NotFoundPage.vue'),
       },
     ],
   },
   {
     path: '/:pathMatch(.*)*',
     name: ROUTE_NAMES.notFoundPublic,
-    component: () => import('@/views/FrontPages/NotFoundPublic.vue'),
+    component: () => import('@/views/FrontPages/NotFoundPublicPage.vue'),
   },
 ]
 
