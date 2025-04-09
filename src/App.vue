@@ -10,6 +10,9 @@
     <template #subscription>
       <Subscription />
     </template>
+    <template #notfound>
+      <NotFoundPublic />
+    </template>
   </Hero>
   <div :class="route.meta.requiresAuth ? '' : 'px-[100px]'">
     <RouterView />
@@ -36,6 +39,7 @@ const updateDocumentTitle = () => {
     [ROUTE_NAMES.galleryPage]: 'Gallery',
     [ROUTE_NAMES.contactPage]: 'Contact',
     [ROUTE_NAMES.loginPage]: 'Login',
+    [ROUTE_NAMES.notFoundPublic]: 'Not Found',
     [ROUTE_NAMES.dashboardPage]: `Admin | ${t('admin.documentTitle.dashboard')}`,
     [ROUTE_NAMES.articlesPage]: `Admin | ${t('admin.documentTitle.articles')}`,
     [ROUTE_NAMES.eventsPage]: `Admin | ${t('admin.documentTitle.events')}`,

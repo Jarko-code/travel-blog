@@ -1,5 +1,5 @@
 <template>
-  <div>public not found</div>
+  <div></div>
 </template>
 
 <script setup></script>
