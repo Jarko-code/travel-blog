@@ -23,7 +23,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   //navigations guards
-  const publicPage = ['/login', '/']
+  const publicPage = ['/login', '/', '/blog', '/event', '/gallery', '/contact']
   const authRequired = !publicPage.includes(to.path)
   const authStore = useAuthStore()
 

@@ -12,11 +12,9 @@
         </div>
       </RouterLink>
       <div>
-        <RouterLink class="px-2.5" :to="ROUTE_NAMES.homePage">Home</RouterLink>
-        <RouterLink class="px-2.5" :to="ROUTE_NAMES.blogPage">Blog</RouterLink>
-        <RouterLink class="px-2.5" :to="ROUTE_NAMES.eventPage">Events</RouterLink>
-        <RouterLink class="px-2.5" :to="ROUTE_NAMES.galleryPage">Gallery</RouterLink>
-        <RouterLink class="px-2.5" :to="ROUTE_NAMES.contactPage">Contact</RouterLink>
+        <RouterLink v-for="(route, index) in navLinks" :key="index" class="px-2.5" :to="route.path">
+          {{ route.label }}
+        </RouterLink>
         <template v-if="route.name !== ROUTE_NAMES.loginPage && !isLoggedIn">
           <RouterLink class="px-2.5" :to="ROUTE_NAMES.loginPage">
             <Button label="Login" severity="danger" />
@@ -50,6 +48,14 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const isLoggedIn = computed(() => !!authStore.user) // Check if user exists
+
+const navLinks = [
+  { label: 'Home', path: ROUTE_NAMES.homePage },
+  { label: 'Blog', path: ROUTE_NAMES.blogPage },
+  { label: 'Events', path: ROUTE_NAMES.eventPage },
+  { label: 'Gallery', path: ROUTE_NAMES.galleryPage },
+  { label: 'Contact', path: ROUTE_NAMES.contactPage },
+]
 </script>
 
 <style lang="scss"></style>
