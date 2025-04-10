@@ -8,7 +8,19 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 // Register User
 router.post('/register', async (req, res) => {
-  const { username, email, password } = req.body
+  const {
+    name,
+    surname,
+    email,
+    password,
+    phoneNumber,
+    position,
+    role,
+    personalNumber,
+    address,
+    profilePicture,
+    accountStatus,
+  } = req.body
 
   try {
     // Validate password
@@ -24,7 +36,19 @@ router.post('/register', async (req, res) => {
     if (user) return res.status(400).json({ message: 'User already exists' })
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    user = new User({ username, email, password: hashedPassword })
+    user = new User({
+      name,
+      surname,
+      email,
+      password: hashedPassword,
+      phoneNumber,
+      position,
+      role,
+      personalNumber,
+      address,
+      profilePicture,
+      accountStatus,
+    })
     await user.save()
 
     res.status(201).json({ message: 'User registered successfully' })
@@ -49,7 +73,10 @@ router.post('/login', async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid password' })
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '3h' })
-    res.json({ token, user: { id: user._id, username: user.username, email: user.email } })
+    res.json({
+      token,
+      user: { id: user._id, username: user.name + ' ' + user.surname, email: user.email },
+    })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -59,7 +86,8 @@ router.post('/login', async (req, res) => {
 router.get('/me', async (req, res) => {
   try {
     const token = req.headers['authorization']
-    console.log(token)
+    // console.log(token)
+    // console.log('Authorization Header:', req.headers)
     if (!token) return res.status(401).json({ message: 'Unauthorized' })
 
     const decoded = jwt.verify(token, JWT_SECRET)
