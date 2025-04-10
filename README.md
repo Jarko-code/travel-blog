@@ -26,7 +26,13 @@ ask me for invitation and you will get API tests
 
 ## Seeds
 
-if you want to seed the DB, go to seed folder and you have two options
+if you want to seed the DB, go to seed and run node seed.js
+the output should be like this: (depends on collections count)
 
-1. run node <file.js> to seed to specific DB table
-2. run node seed.js to seed to all DB tables
+MongoDB Connected
+Database is connected and ready.
+Indexes removed from collection: users
+Indexes removed from collection: subscriptions
+All indexes have been removed from all collections.
+All seeds have been successfully added to the database.
+MongoDB disconnected.

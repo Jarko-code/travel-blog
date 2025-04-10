@@ -1,11 +1,12 @@
 const express = require('express')
 const dotenv = require('dotenv')
-const connectDB = require('./config/db')
+const { connectDB } = require('./config/db')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const authRoutes = require('./routes/auth')
 const subscriptionRoutes = require('./routes/subscription')
+const userRoutes = require('./routes/users')
 
 dotenv.config() // Load environment variables
 connectDB()
@@ -27,5 +28,6 @@ app.post('/test-body', (req, res) => {
 })
 app.use('/api/auth', authRoutes)
 app.use('/api', subscriptionRoutes)
+app.use('/api', userRoutes)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

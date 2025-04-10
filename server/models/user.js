@@ -8,9 +8,18 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phoneNumber: { type: String },
     position: { type: String },
-    role: { type: String, required: true },
+    role: {
+      type: String,
+      required: true,
+      enum: ['Admin', 'Editor', 'User'],
+      default: 'User',
+    },
     personalNumber: { type: String, required: true },
-    address: { type: String, required: true },
+    address: {
+      street: { type: String, required: true },
+      postcode: { type: String, required: true },
+      city: { type: String, required: true },
+    },
     profilePicture: { type: String },
     accountStatus: {
       type: String,

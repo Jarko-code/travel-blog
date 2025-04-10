@@ -1,14 +1,12 @@
 const mongoose = require('mongoose')
 const { faker } = require('@faker-js/faker')
-const Subscription = require('../models/subscription')
-const connectDB = require('../config/db')
+const Subscription = require('../../models/subscription')
 
 const dotenv = require('dotenv')
 dotenv.config({ path: '../.env' })
 
-async function seedSubscriptions() {
+async function subscriptionsFactory() {
   try {
-    await connectDB()
     await Subscription.deleteMany({})
 
     // Create an array of promises
@@ -23,18 +21,10 @@ async function seedSubscriptions() {
     }
 
     await Promise.all(subscriptionPromises) // Wait for all to complete
-    console.log('Database seeded successfully!')
   } catch (err) {
-    console.error('Error seeding database:', err)
-  } finally {
-    await mongoose.disconnect() // Ensure disconnection happens after all operations
+    console.error('Error seeding subscription:', err)
   }
 }
 
-// Run immediately if the file is executed directly
-if (require.main === module) {
-  seedSubscriptions()
-}
-
 // Export so you can import elsewhere
-module.exports = seedSubscriptions
+module.exports = subscriptionsFactory
