@@ -17,7 +17,7 @@
     </Menu>
   </aside>
   <aside class="w-[80px] lg:hidden block bg-white">
-    <Menu :model="MENU_ROUTES" class="pl-5 pt-5">
+    <Menu :model="MENU_ROUTES" class="pl-5 pt-5" style="mini-width: unset">
       <template #item="{ item, props }">
         <router-link
           :class="item.route.name === route.name ? 'active-link' : ''"
