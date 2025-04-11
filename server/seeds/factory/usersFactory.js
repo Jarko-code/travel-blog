@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { faker } = require('@faker-js/faker')
+const bcrypt = require('bcryptjs')
 const User = require('../../models/user')
 
 const dotenv = require('dotenv')
@@ -9,7 +10,36 @@ async function usersFactory() {
   try {
     await User.deleteMany({})
 
-    // Create an array of promises
+    // Check if test user exists and if not, create him
+    const existingTestUser = await User.findOne({ email: 'test@example.com' })
+    if (!existingTestUser) {
+      const hashedPassword = await bcrypt.hash('password1234+', 10)
+
+      const testUser = new User({
+        name: 'Test',
+        surname: 'User',
+        email: 'test@example.com',
+        password: hashedPassword,
+        phoneNumber: '123456789',
+        position: 'Team lead',
+        role: 'Admin',
+        personalNumber: '901530',
+        address: {
+          street: 'Povstalecka 15',
+          postcode: '040 01',
+          city: 'Kosice',
+        },
+        profilePicture: faker.image.avatar(),
+        accountStatus: 'Active',
+      })
+
+      await testUser.save()
+      console.log('Test user created.')
+    } else {
+      console.log('Test user already exists, skipping creation.')
+    }
+
+    // Genereta fake users
     const userPromises = []
     const roles = ['Admin', 'Editor', 'User']
     const statuses = ['Active', 'Inactive']
@@ -18,14 +48,14 @@ async function usersFactory() {
       const role = roles[Math.floor(Math.random() * roles.length)]
       const status = statuses[Math.floor(Math.random() * statuses.length)]
 
-      const newUsers = new User({
+      const newUser = new User({
         name: faker.person.firstName(),
         surname: faker.person.lastName(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
+        password: await bcrypt.hash(faker.internet.password(), 10),
         phoneNumber: faker.phone.number({ style: 'international' }),
         position: faker.person.jobTitle(),
-        role: role,
+        role,
         personalNumber: faker.number.binary(255),
         address: {
           street: faker.location.street(),
@@ -35,14 +65,15 @@ async function usersFactory() {
         profilePicture: faker.image.avatar(),
         accountStatus: status,
       })
-      userPromises.push(newUsers.save()) // Collect promises
+      userPromises.push(newUser.save())
     }
 
-    await Promise.all(userPromises) // Wait for all to complete
+    await Promise.all(userPromises)
+
+    console.log('Seeding completed successfully')
   } catch (err) {
     console.error('Error seeding users:', err)
   }
 }
 
-// Export so you can import elsewhere
 module.exports = usersFactory
