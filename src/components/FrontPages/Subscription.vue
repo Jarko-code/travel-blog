@@ -26,7 +26,7 @@
           label="Subscribe"
           style="--p-button-label-font-weight: 700; --p-button-padding-x: 1.7rem; font-size:0.875rem"
           severity="danger"
-          class="ml-[7vw]"
+          class="ml-[7vw] max-h-10"
         />
       </div>
     </form>
