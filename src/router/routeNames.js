@@ -19,4 +19,7 @@ export const ROUTE_NAMES = {
   settingsPage: 'settings',
   notFoundCms: 'item-not-found',
   newEmailPost: 'new-email-post',
+  newUser: 'new-user',
+  userDetail: 'user-detail',
+  userEdit: 'user-edit',
 }

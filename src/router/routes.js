@@ -23,6 +23,9 @@ const adminChildrenPages = [
   { path: 'tags', name: ROUTE_NAMES.tagsPage, view: 'TagsPage' },
   { path: 'categories', name: ROUTE_NAMES.categoriesPage, view: 'CategoriesPage' },
   { path: 'users', name: ROUTE_NAMES.usersPage, view: 'UsersPage' },
+  { path: 'users/new-user', name: ROUTE_NAMES.newUser, view: 'NewUserPage' },
+  { path: 'users/:id', name: ROUTE_NAMES.userDetail, view: 'UserDetailPage' },
+  { path: 'users/:id/edit', name: ROUTE_NAMES.userEdit, view: 'UserEditPage' },
   { path: 'images', name: ROUTE_NAMES.imagesPage, view: 'ImagesPage' },
   { path: 'subscriptions', name: ROUTE_NAMES.subscriptionsPage, view: 'SubscriptionsPage' },
   {

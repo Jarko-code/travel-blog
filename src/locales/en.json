@@ -19,6 +19,25 @@
     "adminLayout": {
       "logout": "Logout"
     },
+    "users": {
+      "search": "Search",
+      "import": "Import users",
+      "export": "Export users",
+      "createUser": "New user",
+      "name": "Name",
+      "position": "Position",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "actions": "Actions",
+      "deleteMessage": "Do you want to delete this user?",
+      "deleteHeader": "Danger Zone",
+      "deleteCancel": "Cancel",
+      "delete": "Delete",
+      "removed": "User removed",
+      "removedMessage": "User successfully removed",
+      "rejected": "Rejected",
+      "rejectedMessage": "Operation rejected"
+    },
     "subscription": {
       "newPostButton": "Create email post",
       "name": "Name",

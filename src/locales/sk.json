@@ -19,6 +19,25 @@
     "adminLayout": {
       "logout": "Odhlasiť sa"
     },
+    "users": {
+      "search": "Vyhľadať",
+      "import": "Importovať",
+      "export": "Exportovať",
+      "createUser": "Nový užívateľ",
+      "name": "Meno",
+      "position": "Pozícia",
+      "phoneNumber": "Tel. číslo",
+      "email": "Email",
+      "actions": "Akcie",
+      "deleteMessage": "Chcete vymazať tohto užívateľa?",
+      "deleteHeader": "Nebezpečná zóna",
+      "deleteCancel": "Zrušiť",
+      "delete": "Vymazať",
+      "removed": "Užívateľ vymazaný",
+      "removedMessage": "Užívateľ úspešne vymazaný",
+      "rejected": "Zrušené",
+      "rejectedMessage": "Operácia zrušená"
+    },
     "subscription": {
       "newPostButton": "Výtvoriť nový email",
       "name": "Meno",

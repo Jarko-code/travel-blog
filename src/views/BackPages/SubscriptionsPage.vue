@@ -19,12 +19,12 @@
           </RouterLink>
         </div>
       </template>
-      <Column field="firstName"
+      <Column field="firstName" :style="{ width: '200px' }"
         ><template #header>
           <span class="block w-full font-semibold">{{ t('admin.subscription.name') }}</span>
         </template></Column
       >
-      <Column field="email"
+      <Column field="email" :style="{ width: '400px' }"
         ><template #header>
           <span class="block w-full font-semibold">{{ t('admin.subscription.email') }}</span>
         </template></Column
