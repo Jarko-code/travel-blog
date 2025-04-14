@@ -8,7 +8,11 @@ dotenv.config({ path: '../.env' })
 
 async function usersFactory() {
   try {
-    await User.deleteMany({})
+    const exists = await User.exists({})
+    if (exists) {
+      console.log('Users already exist. Skipping seeding.')
+      return
+    }
 
     // Check if test user exists and if not, create him
     const existingTestUser = await User.findOne({ email: 'test@example.com' })

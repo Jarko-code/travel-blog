@@ -7,7 +7,11 @@ dotenv.config({ path: '../.env' })
 
 async function subscriptionsFactory() {
   try {
-    await Subscription.deleteMany({})
+    const exists = await Subscription.exists({})
+    if (exists) {
+      console.log('Subscriptions already exist. Skipping seeding.')
+      return
+    }
 
     // Create an array of promises
     const subscriptionPromises = []
