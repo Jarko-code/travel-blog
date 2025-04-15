@@ -5,7 +5,23 @@ import { USERS } from '@/data/api/users'
 export const useUserStore = defineStore('user', {
   state: () => ({
     users: [],
-    user: {},
+    user: {
+      personalNumber: '',
+      name: '',
+      surname: '',
+      position: '',
+      phoneNumber: '',
+      email: '',
+      role: '',
+      accountStatus: '',
+      profilePicture: '',
+      description: '',
+      address: {
+        street: '',
+        city: '',
+        postcode: '',
+      },
+    },
   }),
   actions: {
     async getAllUsers() {
@@ -23,24 +39,38 @@ export const useUserStore = defineStore('user', {
     async getUser(id) {
       try {
         const response = await fetchApi.get(`${USERS}/${id}`)
-        if (!response) {
+        if (!response || !response.user) {
           throw new Error('Failed to fetch user')
         }
-        this.user = response
+
+        this.user = {
+          ...this.user, // default štruktúra zo state
+          ...response.user, // reálne dáta z API
+          address: {
+            ...this.user.address,
+            ...response.user.address,
+          },
+        }
       } catch (error) {
         console.error('Error fetching user:', error)
       }
     },
 
-    async getUser(id) {
+    async updateUser(id, updatedData) {
       try {
-        const response = await fetchApi.put(`${USERS}/${id}`)
-        if (!response) {
+        const response = await fetchApi.put(`${USERS}/${id}`, updatedData)
+        if (!response || !response.user) {
           throw new Error('Failed to update user')
         }
-        this.user = response
+
+        this.user = response.user
+
+        const index = this.users.findIndex((u) => u._id === id)
+        if (index !== -1) {
+          this.users[index] = response.user
+        }
       } catch (error) {
-        console.error('Error to update user:', error)
+        console.error('Error updating user:', error)
       }
     },
 

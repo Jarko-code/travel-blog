@@ -21,5 +21,4 @@ export const ROUTE_NAMES = {
   newEmailPost: 'new-email-post',
   newUser: 'new-user',
   userDetail: 'user-detail',
-  userEdit: 'user-edit',
 }

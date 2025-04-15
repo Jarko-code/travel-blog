@@ -48,22 +48,26 @@
       </template>
       <Column field="name">
         <template #header>
-          <span class="block w-full font-semibold">{{ t('admin.users.name') }}</span>
+          <span class="block w-full font-semibold">
+            {{ t('admin.users.name') }}
+          </span>
         </template>
         <template #body="{ data }">
-          <span>{{ data.name }} {{ data.surname }} </span>
+          <span> {{ data.name }} {{ data.surname }} </span>
         </template>
       </Column>
       <Column field="position">
         <template #header>
-          <span class="block w-full font-semibold">{{ t('admin.users.position') }}</span>
+          <span class="block w-full font-semibold">
+            {{ t('admin.users.position') }}
+          </span>
         </template>
       </Column>
       <Column field="phoneNumber">
         <template #header>
-          <span class="block w-full font-semibold text-center">{{
-            t('admin.users.phoneNumber')
-          }}</span>
+          <span class="block w-full font-semibold text-center">
+            {{ t('admin.users.phoneNumber') }}
+          </span>
         </template>
         <template #body="{ data }">
           <a :href="`tel:${data.phoneNumber}`" class="flex justify-center">
@@ -73,7 +77,9 @@
       </Column>
       <Column field="email">
         <template #header>
-          <span class="block w-full font-semibold text-center">{{ t('admin.users.email') }}</span>
+          <span class="block w-full font-semibold text-center">
+            {{ t('admin.users.email') }}
+          </span>
         </template>
         <template #body="{ data }">
           <a :href="`mailto:${data.email}`" class="flex justify-center">
@@ -83,9 +89,9 @@
       </Column>
       <Column>
         <template #header>
-          <span class="block w-full font-semibold text-center">{{
-            t('admin.subscription.actions')
-          }}</span>
+          <span class="block w-full font-semibold text-center">
+            {{ t('admin.subscription.actions') }}
+          </span>
         </template>
         <template #body="{ data }">
           <div class="flex items-center justify-around">
@@ -95,13 +101,6 @@
             >
               <i class="pi pi-eye text-blue-500"></i>
             </RouterLink>
-            <RouterLink
-              :to="{ name: ROUTE_NAMES.userEdit, params: { id: data._id } }"
-              class="flex justify-center cursor-pointer"
-            >
-              <i class="pi pi-pencil text-orange-500"></i>
-            </RouterLink>
-
             <div @click="removeUser(data._id)" class="flex justify-center cursor-pointer">
               <i class="pi pi-trash text-red-500"></i>
             </div>

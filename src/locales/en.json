@@ -14,7 +14,8 @@
     },
     "default": {
       "notFoundButton": "Back to previous page",
-      "notFound": "Page not found!"
+      "notFound": "Page not found!",
+      "back": "Back"
     },
     "adminLayout": {
       "logout": "Logout"
@@ -36,7 +37,20 @@
       "removed": "User removed",
       "removedMessage": "User successfully removed",
       "rejected": "Rejected",
-      "rejectedMessage": "Operation rejected"
+      "rejectedMessage": "Operation rejected",
+      "edit": "Edit",
+      "save": "Save",
+      "stopEditing": "Stop editing",
+      "updated": "User updated",
+      "updatedMessage": "The user was successfully updated.",
+      "personalNumber": "Personal number",
+      "surname": "Surname",
+      "role": "Role",
+      "street": "Street",
+      "postcode": "Postcode",
+      "city": "City",
+      "accountStatus": "Account status",
+      "description": "Description"
     },
     "subscription": {
       "newPostButton": "Create email post",

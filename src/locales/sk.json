@@ -14,7 +14,8 @@
     },
     "default": {
       "notFoundButton": "Späť na predchádzjúcu stránku",
-      "notFound": "Stránka nenájdená!"
+      "notFound": "Stránka nenájdená!",
+      "back": "Späť"
     },
     "adminLayout": {
       "logout": "Odhlasiť sa"
@@ -36,7 +37,20 @@
       "removed": "Užívateľ vymazaný",
       "removedMessage": "Užívateľ úspešne vymazaný",
       "rejected": "Zrušené",
-      "rejectedMessage": "Operácia zrušená"
+      "rejectedMessage": "Operácia zrušená",
+      "edit": "Upraviť",
+      "save": "Uložiť",
+      "stopEditing": "Zrušiť",
+      "updated": "Užívateľ aktualizovaný",
+      "updatedMessage": "Užívateľ bol úspešne aktualizovaný.",
+      "personalNumber": "Osobné číslo",
+      "surname": "Priezvisko",
+      "role": "Rola",
+      "street": "Ulica",
+      "postcode": "PSČ",
+      "city": "Mesto",
+      "accountStatus": "Účet",
+      "description": "Popis"
     },
     "subscription": {
       "newPostButton": "Výtvoriť nový email",
