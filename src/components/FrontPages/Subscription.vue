@@ -13,7 +13,7 @@
       @submit="submitSubscription"
     >
       <div id="text-inputs" class="flex gap-x-6">
-        <div id="name-input">
+        <div id="name-input" class="w-full">
           <InputText
             type="text"
             name="firstName"
@@ -32,7 +32,7 @@
             {{$form.firstName.error.message}}
           </Message>
         </div>
-        <div id="email-input">
+        <div id="email-input" class="w-full">
           <InputText
             type="text"
             name="email"
