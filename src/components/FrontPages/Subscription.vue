@@ -96,15 +96,9 @@
 </template>
 
 <script setup>
-  import InputText from 'primevue/inputtext';
-  import Checkbox from 'primevue/checkbox';
-  import Button from 'primevue/button';
   import { reactive } from 'vue'
-  import { useAlertStore } from '@/stores/alertStore'
   import { validateEmail, validateFirstName, validateCheckbox } from '@/composables/validations'
   import { useSubscriptionStore } from '@/stores/subscriptionStore'
-
-  const alert = useAlertStore()
 
   const formData = reactive({
     email: '',

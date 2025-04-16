@@ -34,7 +34,6 @@ export const useSubscriptionStore = defineStore('subscription', {
 
       if (!checked) {
         alert.error('Consent Required', 'You must agree to the privacy policy.')
-        return { success: false }
       }
 
       try {
@@ -44,7 +43,6 @@ export const useSubscriptionStore = defineStore('subscription', {
         })
 
         alert.success('Subscribed!', 'You’ve successfully subscribed.')
-        return { success: true }
 
       } catch (error) {
         if (error.response) {
@@ -61,7 +59,6 @@ export const useSubscriptionStore = defineStore('subscription', {
           alert.error('Network Error', 'Server unreachable or offline.')
         }
 
-        return { success: false }
       }
     },
   },
