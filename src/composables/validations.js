@@ -14,7 +14,7 @@ export const validatePassword = (password) => {
 }
 
 export const validateFirstName = (firstName) => {
-  if (!firstName) return 'Login name is required.'
+  if (!firstName) return 'First name is required.'
   if (firstName.length < 2 || firstName.length > 20) {
     return 'Login name must be between 2 and 20 characters.'
   }

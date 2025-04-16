@@ -34,6 +34,7 @@ export const useSubscriptionStore = defineStore('subscription', {
 
       if (!checked) {
         alert.error('Consent Required', 'You must agree to the privacy policy.')
+        return
       }
 
       try {
