@@ -46,9 +46,13 @@ async function handleResponse(response) {
       logout()
     }
 
-    // get error message from body or default to response status
-    const error = (data && data.message) || response.status
-    return Promise.reject(error)
+    // return a structured error object
+    const error = {
+      message: (data && data.message) || 'An error occurred',
+      status: response.status,
+      data: data || null,
+    }
+    return Promise.reject(error) // return the structured error object
   }
 
   return data

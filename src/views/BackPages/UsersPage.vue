@@ -101,8 +101,43 @@
             >
               <i class="pi pi-eye text-blue-500"></i>
             </RouterLink>
-            <div @click="removeUser(data._id)" class="flex justify-center cursor-pointer">
-              <i class="pi pi-trash text-red-500"></i>
+            <div>
+              <RouterLink
+                v-if="isAdmin"
+                :to="{
+                  name: ROUTE_NAMES.userDetail,
+                  params: { id: data._id },
+                  query: { edit: 'true' },
+                }"
+                class="flex justify-center cursor-pointer"
+              >
+                <i class="pi pi-pencil text-orange-500"></i>
+              </RouterLink>
+
+              <span
+                v-else
+                class="flex justify-center cursor-not-allowed opacity-50"
+                :title="t('admin.default.edit')"
+              >
+                <i class="pi pi-pencil text-orange-500"></i>
+              </span>
+            </div>
+            <div>
+              <div
+                v-if="isAdmin"
+                @click="removeUser(data._id)"
+                class="flex justify-center cursor-pointer"
+              >
+                <i class="pi pi-trash text-red-500"></i>
+              </div>
+
+              <span
+                v-else
+                class="flex justify-center cursor-not-allowed opacity-50"
+                :title="t('admin.default.delete')"
+              >
+                <i class="pi pi-trash text-red-500"></i>
+              </span>
             </div>
           </div>
         </template>
@@ -122,7 +157,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { storeToRefs } from 'pinia'
 import { ROUTE_NAMES } from '@/router/routeNames'
@@ -139,6 +174,11 @@ const keyword = ref('')
 
 onMounted(async () => {
   await userStore.getAllUsers()
+})
+
+const isAdmin = computed(() => {
+  const user = JSON.parse(localStorage.getItem('user'))
+  return user.user.role === 'Admin'
 })
 
 const removeUser = async (id) => {

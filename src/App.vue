@@ -46,6 +46,7 @@ const updateDocumentTitle = () => {
     [ROUTE_NAMES.tagsPage]: `Admin | ${t('admin.documentTitle.tags')}`,
     [ROUTE_NAMES.categoriesPage]: `Admin | ${t('admin.documentTitle.categories')}`,
     [ROUTE_NAMES.usersPage]: `Admin | ${t('admin.documentTitle.users')}`,
+    [ROUTE_NAMES.userDetail]: `Admin | ${t('admin.documentTitle.usersDetail')}`,
     [ROUTE_NAMES.imagesPage]: `Admin | ${t('admin.documentTitle.images')}`,
     [ROUTE_NAMES.subscriptionsPage]: `Admin | ${t('admin.documentTitle.subscribers')}`,
     [ROUTE_NAMES.newEmailPost]: `Admin | ${t('admin.documentTitle.newEmailPost')}`,

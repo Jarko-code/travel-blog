@@ -11,7 +11,13 @@
       >
       </i>
     </div>
-    <Menu class="text-sm cursor-pointer" ref="isLangVisible" id="overlay_menu" :popup="true">
+    <Menu
+      class="text-sm cursor-pointer"
+      ref="isLangVisible"
+      id="overlay_menu"
+      :popup="true"
+      style="min-width: unset"
+    >
       <template #end>
         <ul v-show="isLangVisible">
           <li

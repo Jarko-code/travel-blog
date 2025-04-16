@@ -7,6 +7,7 @@
       "tags": "Tagy",
       "categories": "Kategórie",
       "users": "Užívatelia",
+      "usersDetail": "Užívateľ",
       "images": "Obrázky",
       "subscribers": "Odberatelia",
       "newEmailPost": "Nový email",
@@ -15,7 +16,9 @@
     "default": {
       "notFoundButton": "Späť na predchádzjúcu stránku",
       "notFound": "Stránka nenájdená!",
-      "back": "Späť"
+      "back": "Späť",
+      "edit": "Nemáš oprávnenie na editaciu",
+      "delete": "Nemáš oprávnenie na vymazanie"
     },
     "adminLayout": {
       "logout": "Odhlasiť sa"
@@ -39,8 +42,8 @@
       "rejected": "Zrušené",
       "rejectedMessage": "Operácia zrušená",
       "edit": "Upraviť",
-      "save": "Uložiť",
-      "stopEditing": "Zrušiť",
+      "update": "Uložiť",
+      "discard": "Zrušiť",
       "updated": "Užívateľ aktualizovaný",
       "updatedMessage": "Užívateľ bol úspešne aktualizovaný.",
       "personalNumber": "Osobné číslo",
@@ -50,7 +53,21 @@
       "postcode": "PSČ",
       "city": "Mesto",
       "accountStatus": "Účet",
-      "description": "Popis"
+      "description": "Popis",
+      "roles": {
+        "admin": "Administrator",
+        "user": "Užívateľ",
+        "editor": "Editor"
+      },
+      "status": {
+        "active": "Aktívny",
+        "inActive": "Deaktivovaný"
+      },
+      "positions": {
+        "developer": "Developer",
+        "designer": "Dizajnér",
+        "qaEngineer": "QA Inžinier"
+      }
     },
     "subscription": {
       "newPostButton": "Výtvoriť nový email",

@@ -27,14 +27,13 @@ export const useAuthStore = defineStore('auth', {
         router.push({ name: ROUTE_NAMES.dashboardPage })
       } catch (error) {
         const alert = useAlertStore()
-
-        if (error.response) {
-          const { status } = error.response
-
-          if (status === 400) {
+        if (error.status) {
+          if (error.status === 400) {
             alert.error('Invalid Request', 'Please check your input and try again')
-          } else if (status === 401) {
+          } else if (error.status === 401) {
             alert.error('Unauthorized', 'Incorrect email or password')
+          } else if (error.status === 403) {
+            alert.error('Disabled', 'Account is disabled')
           } else {
             alert.error('Login failed', 'Unexpected error occurred')
           }

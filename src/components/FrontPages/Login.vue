@@ -3,6 +3,7 @@
     <h2 class="text-red font-semibold text-3xl mb-2.5">Sing in</h2>
     <p class="text-black font-normal text-sm mb-8">Welcome back to your account.</p>
     <Form
+      v-slot="$form"
       :formData="formData"
       :resolver="resolver"
       :validateOnValueUpdate="true"

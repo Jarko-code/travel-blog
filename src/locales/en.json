@@ -7,6 +7,7 @@
       "tags": "Tags",
       "categories": "Categories",
       "users": "Users",
+      "usersDetail": "User detail",
       "images": "Images",
       "subscribers": "Subscribers",
       "newEmailPost": "New email post",
@@ -15,7 +16,9 @@
     "default": {
       "notFoundButton": "Back to previous page",
       "notFound": "Page not found!",
-      "back": "Back"
+      "back": "Back",
+      "edit": "You don`t have permision to edit user",
+      "delete": "You don`t have permision to delete user"
     },
     "adminLayout": {
       "logout": "Logout"
@@ -39,8 +42,8 @@
       "rejected": "Rejected",
       "rejectedMessage": "Operation rejected",
       "edit": "Edit",
-      "save": "Save",
-      "stopEditing": "Stop editing",
+      "update": "Update",
+      "discard": "Discard",
       "updated": "User updated",
       "updatedMessage": "The user was successfully updated.",
       "personalNumber": "Personal number",
@@ -50,7 +53,21 @@
       "postcode": "Postcode",
       "city": "City",
       "accountStatus": "Account status",
-      "description": "Description"
+      "description": "Description",
+      "roles": {
+        "admin": "Admin",
+        "user": "User",
+        "editor": "Editor"
+      },
+      "status": {
+        "active": "Active",
+        "inActive": "Inactive"
+      },
+      "positions": {
+        "developer": "Developer",
+        "designer": "Designer",
+        "qaEngineer": "QA Engineer"
+      }
     },
     "subscription": {
       "newPostButton": "Create email post",

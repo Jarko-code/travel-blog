@@ -15,6 +15,7 @@ router.post('/register', async (req, res) => {
     password,
     phoneNumber,
     position,
+    description,
     role,
     personalNumber,
     address,
@@ -43,6 +44,7 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
       phoneNumber,
       position,
+      description,
       role,
       personalNumber,
       address,
@@ -61,6 +63,12 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body
 
+  const user = await User.findOne({ email })
+
+  if (user.accountStatus === 'Disabled') {
+    return res.status(403).json({ message: 'Account is disabled' })
+  }
+
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' })
   }
@@ -75,7 +83,12 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '3h' })
     res.json({
       token,
-      user: { id: user._id, username: user.name + ' ' + user.surname, email: user.email },
+      user: {
+        id: user._id,
+        username: user.name + ' ' + user.surname,
+        email: user.email,
+        role: user.role,
+      },
     })
   } catch (error) {
     res.status(500).json({ error: error.message })

@@ -26,6 +26,7 @@ async function usersFactory() {
         password: hashedPassword,
         phoneNumber: '123456789',
         position: 'Team lead',
+        description: faker.hacker.phrase(),
         role: 'Admin',
         personalNumber: '901530',
         address: {
@@ -59,6 +60,7 @@ async function usersFactory() {
         password: await bcrypt.hash(faker.internet.password(), 10),
         phoneNumber: faker.phone.number({ style: 'international' }),
         position: faker.person.jobTitle(),
+        description: faker.hacker.phrase(),
         role,
         personalNumber: faker.number.binary(255),
         address: {

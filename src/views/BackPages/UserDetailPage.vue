@@ -2,144 +2,55 @@
   <ConfirmDialog />
   <div class="flex items-center justify-between">
     <BackButton label="admin.default.back" severity="secondary" />
-    <div>
-      <Button
-        v-if="!isEditing"
-        @click="toggleEdit"
-        severity="warn"
-        icon="pi pi-pencil"
-        :label="t('admin.users.edit')"
-      />
-      <div v-else>
-        <Button
-          @click="saveUser"
-          severity="success"
-          icon="pi pi-save"
-          :label="t('admin.users.save')"
-        />
-        <span class="pl-3">
-          <Button
-            @click="stopEditing"
-            severity="warn"
-            icon="pi pi-ban"
-            :label="t('admin.users.stopEditing')"
-          />
-        </span>
-        <span class="pl-3">
-          <Button
-            @click="removeUser(userId.value)"
-            :disabled="!isEditing"
-            severity="danger"
-            icon="pi pi-trash"
-            :label="t('admin.users.delete')"
-          />
-        </span>
-      </div>
-    </div>
+    <ActionButtons
+      :isEditing="isEditing"
+      :canEdit="user.role === 'Admin'"
+      :canDelete="isEditing"
+      @edit="toggleEdit"
+      @discard="discardChanges"
+      @update="updateUser"
+      @delete="() => removeUser(userId.value)"
+      :editLabel="t('admin.users.edit')"
+      :updateLabel="t('admin.users.update')"
+      :discardLabel="t('admin.users.discard')"
+      :deleteLabel="t('admin.users.delete')"
+    />
   </div>
   <Divider />
   <Form :formData="user" :validateOnValueUpdate="true" :validateOnBlur="true">
     <div class="flex justify-between items-start gap-8">
       <div class="grid grid-cols-3 gap-4 flex-1">
-        <InputGroup>
+        <InputGroup v-for="field in userFields" :key="field.name">
           <InputGroupAddon>
-            <i class="pi pi-id-card"></i>
+            <i class="pi" :class="field.icon"></i>
           </InputGroupAddon>
-          <InputText
-            name="personalNumber"
-            type="text"
-            :placeholder="t('admin.users.personalNumber')"
-            v-model="user.personalNumber"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-user"></i>
-          </InputGroupAddon>
-          <InputText
-            name="name"
-            type="text"
-            :placeholder="t('admin.users.name')"
-            v-model="user.name"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-user"></i>
-          </InputGroupAddon>
-          <InputText
-            name="surname"
-            type="text"
-            :placeholder="t('admin.users.surname')"
-            v-model="user.surname"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-briefcase"></i>
-          </InputGroupAddon>
-          <InputText
-            name="position"
-            type="text"
-            :placeholder="t('admin.users.position')"
-            v-model="user.position"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-phone"></i>
-          </InputGroupAddon>
-          <InputText
-            name="phoneNumber"
-            type="text"
-            :placeholder="t('admin.users.phoneNumber')"
-            v-model="user.phoneNumber"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-envelope"></i>
-          </InputGroupAddon>
-          <InputText
-            name="email"
-            type="text"
-            :placeholder="t('admin.users.email')"
-            v-model="user.email"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-user-edit"></i>
-          </InputGroupAddon>
-          <InputText
-            name="role"
-            type="text"
-            :placeholder="t('admin.users.role')"
-            v-model="user.role"
-            :disabled="!isEditing"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputGroupAddon>
-            <i class="pi pi-user-edit"></i>
-          </InputGroupAddon>
-          <InputText
-            name="accountStatus"
-            type="text"
-            :placeholder="t('admin.users.accountStatus')"
-            v-model="user.accountStatus"
-            :disabled="!isEditing"
-          />
+          <IftaLabel>
+            <Select
+              v-if="['role', 'accountStatus', 'position'].includes(field.name)"
+              :id="field.name"
+              :options="getOptions(field.name)"
+              v-model="user[field.name]"
+              :disabled="!isEditing"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select"
+              class="w-full"
+              variant="filled"
+            />
+            <InputText
+              v-else
+              :id="field.name"
+              :name="field.name"
+              type="text"
+              v-model="user[field.name]"
+              :disabled="!isEditing"
+              variant="filled"
+            />
+            <label :for="field.name">{{ t(`admin.users.${field.name}`) }}</label>
+          </IftaLabel>
         </InputGroup>
       </div>
 
-      <!-- Profilová fotka -->
       <div class="relative w-32 h-32">
         <img
           :src="user.profilePicture"
@@ -152,52 +63,35 @@
     <Divider />
 
     <div class="grid grid-cols-3 gap-4 flex-1">
-      <InputGroup>
+      <InputGroup v-for="field in addressFields" :key="field.name">
         <InputGroupAddon>
-          <i class="pi pi-map"></i>
+          <i class="pi" :class="field.icon"></i>
         </InputGroupAddon>
-        <InputText
-          name="street"
-          type="text"
-          :placeholder="t('admin.users.street')"
-          v-model="user.address.street"
-          :disabled="!isEditing"
-        />
-      </InputGroup>
-      <InputGroup>
-        <InputGroupAddon>
-          <i class="pi pi-map-marker"></i>
-        </InputGroupAddon>
-        <InputText
-          name="city"
-          type="text"
-          :placeholder="t('admin.users.city')"
-          v-model="user.address.city"
-          :disabled="!isEditing"
-        />
-      </InputGroup>
-      <InputGroup>
-        <InputGroupAddon>
-          <i class="pi pi-code"></i>
-        </InputGroupAddon>
-        <InputText
-          name="postcode"
-          type="text"
-          :placeholder="t('admin.users.postcode')"
-          v-model="user.address.postcode"
-          :disabled="!isEditing"
-        />
+        <IftaLabel>
+          <InputText
+            :id="field.name"
+            :name="field.name"
+            type="text"
+            v-model="user.address[field.name]"
+            :disabled="!isEditing"
+            variant="filled"
+          />
+          <label :for="field.name">{{ t(`admin.users.${field.name}`) }}</label>
+        </IftaLabel>
       </InputGroup>
     </div>
 
     <div class="mt-6">
-      <Textarea
-        v-model="user.description"
-        :disabled="!isEditing"
-        :placeholder="t('admin.users.description')"
-        class="w-full p-3 border rounded-md"
-        rows="4"
-      />
+      <IftaLabel>
+        <Textarea
+          id="description"
+          v-model="user.description"
+          :disabled="!isEditing"
+          class="w-full p-3 border rounded-md"
+          rows="4"
+        />
+        <label for="description">{{ t('admin.users.description') }}</label>
+      </IftaLabel>
     </div>
   </Form>
 </template>
@@ -211,33 +105,87 @@ import { useI18n } from 'vue-i18n'
 import { useConfirm } from 'primevue/useconfirm'
 import { useAlertStore } from '@/stores/alertStore'
 import { ROUTE_NAMES } from '@/router/routeNames'
+import { useEditToggle } from '@/composables/useEditToggle'
 
 const { t } = useI18n()
+
 const route = useRoute()
 const router = useRouter()
+
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
-const confirm = useConfirm()
-const alert = useAlertStore()
 const userId = computed(() => route.params.id)
 
-const isEditing = ref(false)
+const confirm = useConfirm()
+const alert = useAlertStore()
+
+const userFields = [
+  { name: 'personalNumber', icon: 'pi-id-card' },
+  { name: 'name', icon: 'pi-user' },
+  { name: 'surname', icon: 'pi-user' },
+  { name: 'position', icon: 'pi-briefcase' },
+  { name: 'phoneNumber', icon: 'pi-phone' },
+  { name: 'email', icon: 'pi-envelope' },
+  { name: 'role', icon: 'pi-user-edit' },
+  { name: 'accountStatus', icon: 'pi-user-edit' },
+]
+
+const addressFields = [
+  { name: 'street', icon: 'pi-map' },
+  { name: 'city', icon: 'pi-map-marker' },
+  { name: 'postcode', icon: 'pi-code' },
+]
+
+const roleOptions = computed(() => [
+  { label: t('admin.users.roles.admin'), value: 'Admin' },
+  { label: t('admin.users.roles.user'), value: 'User' },
+  { label: t('admin.users.roles.editor'), value: 'Editor' },
+])
+
+const statusOptions = computed(() => [
+  { label: t('admin.users.status.active'), value: 'Active' },
+  { label: t('admin.users.status.inActive'), value: 'Inactive' },
+])
+
+const positionOptions = computed(() => [
+  { label: t('admin.users.positions.developer'), value: 'Developer' },
+  { label: t('admin.users.positions.designer'), value: 'Designer' },
+  { label: t('admin.users.positions.qaEngineer'), value: 'QA Engineer' },
+])
+
+const { isEditing, toggleEdit, discardChanges } = useEditToggle(user)
 
 onMounted(async () => {
   await userStore.getUser(userId.value)
+  if (route.query.edit === 'true') {
+    isEditing.value = true
+  }
 })
 
-const toggleEdit = () => {
-  isEditing.value = !isEditing.value
+const getOptions = (fieldName) => {
+  switch (fieldName) {
+    case 'role':
+      return roleOptions.value
+    case 'accountStatus':
+      return statusOptions.value
+    case 'position':
+      return positionOptions.value
+    default:
+      return []
+  }
 }
 
-const stopEditing = () => {
-  isEditing.value = false // Ukončíme režim úpravy
-}
-
-const saveUser = async () => {
+const updateUser = async () => {
   try {
     await userStore.updateUser(userId.value, user.value)
+
+    const localData = JSON.parse(localStorage.getItem('user'))
+
+    if (localData && localData.user) {
+      localData.user.role = user.value.role
+      localStorage.setItem('user', JSON.stringify(localData))
+    }
+
     alert.success(t('admin.users.updated'), t('admin.users.updatedMessage'))
     isEditing.value = false
   } catch (error) {
