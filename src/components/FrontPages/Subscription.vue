@@ -7,6 +7,7 @@
     <Form
       class="text-sm"
       v-slot="$form"
+      :formData="formData"
       :resolver="resolver"
       :validateOnValueUpdate="true"
       :validateOnBlur="true"
@@ -72,6 +73,7 @@
           </span>
         </span>
         <Button
+          type="submit"
           label="Subscribe"
           style="--p-button-label-font-weight: 700; --p-button-padding-x: 1.7rem; font-size:0.875rem"
           severity="danger"
@@ -100,7 +102,7 @@
   import { reactive } from 'vue'
   import { useAlertStore } from '@/stores/alertStore'
   import { validateEmail, validateFirstName, validateCheckbox } from '@/composables/validations'
-  import { useAuthStore } from '@/stores/authStore'
+  import { useSubscriptionStore } from '@/stores/subscriptionStore'
 
   const alert = useAlertStore()
 
@@ -126,18 +128,15 @@
   }
 
   const submitSubscription = async ({ valid }) => {
-    if (valid) {
-      const authStore = useAuthStore()
-      authStore.loading = true
-      await authStore.login(formData.email, formData.firstName)
+    if (!valid) return
 
-      if (authStore.user) {
-        alert.success('Login succesfull', 'Successfully logged in')
-      } else {
-        alert.error('Login failed', 'Try it again later')
-      }
-      authStore.loading = false
-    }
+    const subscriptionStore = useSubscriptionStore()
+    await subscriptionStore.subscribe(
+      formData.email,
+      formData.firstName,
+      formData.checkbox
+    )
   }
+
 </script>
 <style lang="scss"></style>
