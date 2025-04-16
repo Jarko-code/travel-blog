@@ -54,7 +54,8 @@
       </div>
       <div id="subscription-bottom" class="flex mt-8">
         <Checkbox
-          v-model="checked"
+          v-model="formData.checkbox"
+          name="checkbox"
           binary
           style="
             --p-checkbox-width: 1.625rem;
@@ -63,6 +64,7 @@
           "
           class="self-center mr-3"
         />
+
         <span class="w-full">
           I consent to my personal information being processed in accordance with The Broke Backpacker’s 
           <span class="font-bold text-red-500">
@@ -76,7 +78,18 @@
           class="ml-[7vw] max-h-10"
         />
       </div>
+      <Message
+            v-if="$form.checkbox?.invalid"
+            severity="error"
+            size="small"
+            variant="simple"
+            style="background: rgba(255,255,255,0.9); box-shadow: 0 1px 4px rgba(0,0,0,0.15);"
+            class=" px-3 py-1 rounded mt-1 w-fit"
+          >
+            {{$form.checkbox.error.message}}
+          </Message>
     </Form>
+
   </div>
 </template>
 
@@ -86,7 +99,7 @@
   import Button from 'primevue/button';
   import { reactive } from 'vue'
   import { useAlertStore } from '@/stores/alertStore'
-  import { validateEmail, validateFirstName } from '@/composables/validations'
+  import { validateEmail, validateFirstName, validateCheckbox } from '@/composables/validations'
   import { useAuthStore } from '@/stores/authStore'
 
   const alert = useAlertStore()
@@ -94,6 +107,7 @@
   const formData = reactive({
     email: '',
     firstName: '',
+    checkbox: false,
   })
 
   const resolver = ({ values }) => {
@@ -104,6 +118,9 @@
 
     const firstNameError = validateFirstName(values.firstName)
     if (firstNameError) errors.firstName = [{ message: firstNameError }]
+
+    const checkboxError = validateCheckbox(values.checkbox)
+    if (checkboxError) errors.checkbox = [{ message: checkboxError }]
 
     return { errors }
   }

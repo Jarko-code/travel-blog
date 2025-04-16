@@ -23,3 +23,8 @@ export const validateFirstName = (firstName) => {
   }
   return null
 }
+
+export const validateCheckbox = (checked) => {
+  if (!checked) return 'You have to consent to The Broke Backpacker’s Privacy Policy.'
+  return null
+}
