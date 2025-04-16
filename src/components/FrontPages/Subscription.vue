@@ -130,6 +130,10 @@
       formData.firstName,
       formData.checkbox
     )
+    //reset form after success
+    formData.email = ''
+    formData.firstName = ''
+    formData.checkbox = false
   }
 
 </script>
