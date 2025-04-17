@@ -44,14 +44,11 @@ export const useSubscriptionStore = defineStore('subscription', {
         })
 
         alert.success('Subscribed!', 'You’ve successfully subscribed.')
-
       } catch (error) {
-        if (error.response) {
-          const { status } = error.response
-
-          if (status === 400) {
+        if (error) {
+          if (error.status === 400) {
             alert.error('Invalid Input', 'Please double-check the fields.')
-          } else if (status === 409) {
+          } else if (error.status === 409) {
             alert.error('Already Subscribed', 'This email is already on our list.')
           } else {
             alert.error('Error', 'Subscription failed. Try again later.')
@@ -59,7 +56,6 @@ export const useSubscriptionStore = defineStore('subscription', {
         } else {
           alert.error('Network Error', 'Server unreachable or offline.')
         }
-
       }
     },
   },

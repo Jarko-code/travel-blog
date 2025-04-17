@@ -7,11 +7,22 @@ const router = express.Router()
 router.post('/subscriptions', async (req, res) => {
   try {
     const { firstName, email } = req.body
+
+    if (!firstName || !email) {
+      return res.status(400).json({ error: 'Missing required fields: firstName and email' })
+    }
+
+    const existingSubscription = await Subscription.findOne({ email })
+    if (existingSubscription) {
+      return res.status(409).json({ error: 'Email is already subscribed' })
+    }
+
     const newSubscription = new Subscription({ firstName, email })
     await newSubscription.save()
+
     res.status(201).json(newSubscription)
   } catch (error) {
-    res.status(400).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
