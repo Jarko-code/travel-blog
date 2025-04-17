@@ -12,3 +12,19 @@ export const validatePassword = (password) => {
     return 'Password must contain at least one special character.'
   return null
 }
+
+export const validateFirstName = (firstName) => {
+  if (!firstName) return 'First name is required.'
+  if (firstName.length < 2 || firstName.length > 20) {
+    return 'Login name must be between 2 and 20 characters.'
+  }
+  if (!/^[a-zA-Z0-9._-]+$/.test(firstName)) {
+    return 'Login name can only contain letters, numbers, periods, underscores, and hyphens.'
+  }
+  return null
+}
+
+export const validateCheckbox = (checked) => {
+  if (!checked) return 'You have to consent to The Broke Backpacker’s Privacy Policy.'
+  return null
+}
