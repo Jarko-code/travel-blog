@@ -10,7 +10,10 @@ export function useEditToggle(dataRef) {
   }
 
   const discardChanges = () => {
-    dataRef.value = JSON.parse(JSON.stringify(originalData.value))
+    const cloned = JSON.parse(JSON.stringify(originalData.value))
+    Object.keys(cloned).forEach((key) => {
+      dataRef.value[key] = cloned[key]
+    })
     isEditing.value = false
   }
 
