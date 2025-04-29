@@ -33,9 +33,11 @@ router.post('/register', async (req, res) => {
       })
     }
 
+    // Check if user already exists
     let user = await User.findOne({ email })
     if (user) return res.status(400).json({ message: 'User already exists' })
 
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10)
     user = new User({
       name,
@@ -51,9 +53,28 @@ router.post('/register', async (req, res) => {
       profilePicture,
       accountStatus,
     })
+
+    // Save new user
     await user.save()
 
-    res.status(201).json({ message: 'User registered successfully' })
+    // Return the newly created user object with the response
+    res.status(201).json({
+      message: 'User registered successfully',
+      user: {
+        _id: user._id,
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        position: user.position,
+        description: user.description,
+        role: user.role,
+        personalNumber: user.personalNumber,
+        address: user.address,
+        profilePicture: user.profilePicture,
+        accountStatus: user.accountStatus,
+      },
+    })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -99,13 +120,21 @@ router.post('/login', async (req, res) => {
 router.get('/me', async (req, res) => {
   try {
     const token = req.headers['authorization']
-    // console.log(token)
-    // console.log('Authorization Header:', req.headers)
     if (!token) return res.status(401).json({ message: 'Unauthorized' })
 
     const decoded = jwt.verify(token, JWT_SECRET)
-    const user = await User.findById(decoded.id).select('-password')
-    res.json(user)
+    const user = await User.findById(decoded.id)
+
+    if (!user) return res.status(404).json({ message: 'User not found' })
+
+    res.json({
+      user: {
+        id: user._id,
+        username: user.name + ' ' + user.surname,
+        email: user.email,
+        role: user.role,
+      },
+    })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { fetchApi } from '@/composables/fetchApi'
-import { USERS } from '@/data/api/users'
+import { USERS, NEW_USER } from '@/data/api/users'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -81,6 +81,24 @@ export const useUserStore = defineStore('user', {
         this.users = this.users.filter((user) => user._id !== id)
       } catch (error) {
         console.error('Error removing user:', error)
+      }
+    },
+
+    async addNewUser(newUserData) {
+      try {
+        const response = await fetchApi.post(NEW_USER, newUserData)
+
+        const createdUser = response?.user || response
+
+        if (!createdUser || !createdUser._id) {
+          throw new Error('User ID is missing in response')
+        }
+
+        this.users.push(createdUser)
+        return createdUser
+      } catch (error) {
+        console.error('Error adding user:', error)
+        throw error
       }
     },
   },
