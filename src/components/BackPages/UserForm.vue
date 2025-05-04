@@ -31,6 +31,17 @@
               variant="filled"
             />
             <label :for="field.name">{{ t(`admin.users.${field.name}`) }}</label>
+            <InputGroupAddon v-if="field.name === 'personalNumber' && isRegistration">
+              <Button
+                icon="pi pi-refresh"
+                @click="generatePersonalNumber"
+                severity="secondary"
+                rounded
+                text
+                size="small"
+                class="p-0 m-0"
+              />
+            </InputGroupAddon>
           </IftaLabel>
         </InputGroup>
 
@@ -161,5 +172,10 @@ const getOptions = (fieldName) => {
     default:
       return []
   }
+}
+
+const generatePersonalNumber = () => {
+  const randomNumber = Math.floor(100000 + Math.random() * 900000)
+  formModel.value.personalNumber = randomNumber.toString()
 }
 </script>

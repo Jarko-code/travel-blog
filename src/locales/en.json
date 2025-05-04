@@ -67,7 +67,10 @@
         "developer": "Developer",
         "designer": "Designer",
         "qaEngineer": "QA Engineer"
-      }
+      },
+      "create": "Create",
+      "created": "User created",
+      "createdMessage": "User created succesfully"
     },
     "subscription": {
       "newPostButton": "Create email post",

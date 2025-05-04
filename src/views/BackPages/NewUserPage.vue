@@ -1,7 +1,14 @@
 <template>
-  <div class="flex justify-end mt-4">
-    <button @click="submitUser" class="btn btn-primary">Create</button>
+  <div class="flex justify-between pt-3">
+    <BackButton label="admin.default.back" severity="secondary" />
+    <Button
+      icon="pi pi-user-plus"
+      @click="submitUser"
+      severity="success"
+      :label="t('admin.users.create')"
+    />
   </div>
+  <Divider />
   <UserForm :formModel="newUser" :isEditing="true" :isRegistration="true" />
 </template>
 
@@ -10,19 +17,17 @@ import { reactive } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import { useAlertStore } from '@/stores/alertStore'
+import { useI18n } from 'vue-i18n'
+import { ROUTE_NAMES } from '@/router/routeNames'
 
 const router = useRouter()
 const alert = useAlertStore()
+const { t } = useI18n()
 
 const userStore = useUserStore()
 
-// pridat back a create user button
-// pridat divider
-// pridat generate personal id
 // pridat validaciu
 // pridat i18n
-// route names
-// upravit alerty
 
 const newUser = reactive({
   personalNumber: '',
@@ -44,15 +49,11 @@ const newUser = reactive({
 })
 
 const submitUser = async () => {
-  try {
-    const user = await userStore.addNewUser(newUser)
-    alert.success('User created successfully')
+  const user = await userStore.addNewUser(newUser)
+  alert.success(t('admin.users.created'), t('admin.users.createdMessage'))
 
-    const userId = user._id
+  const userId = user._id
 
-    router.push({ name: 'user-detail', params: { id: userId } })
-  } catch (e) {
-    alert.error('User creation failed', e.message)
-  }
+  router.push({ name: ROUTE_NAMES.userDetail, params: { id: userId } })
 }
 </script>

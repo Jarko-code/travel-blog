@@ -207,4 +207,8 @@ const removeUser = async (id) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.p-datatable-header {
+  padding: 0.75rem 0 !important;
+}
+</style>

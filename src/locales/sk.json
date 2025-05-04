@@ -67,7 +67,10 @@
         "developer": "Developer",
         "designer": "Dizajnér",
         "qaEngineer": "QA Inžinier"
-      }
+      },
+      "create": "Vytvoriť",
+      "created": "Užívateľ vytvorený",
+      "createdMessage": "Užívateľ úspešne vytvorený"
     },
     "subscription": {
       "newPostButton": "Výtvoriť nový email",
