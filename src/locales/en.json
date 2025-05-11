@@ -11,7 +11,8 @@
       "images": "Images",
       "subscribers": "Subscribers",
       "newEmailPost": "New email post",
-      "settingsAndProfile": "Settings and profile"
+      "settingsAndProfile": "Settings and profile",
+      "newUser": "New user"
     },
     "default": {
       "notFoundButton": "Back to previous page",
@@ -63,6 +64,7 @@
         "active": "Active",
         "inActive": "Inactive"
       },
+      "password": "Password",
       "positions": {
         "developer": "Developer",
         "designer": "Designer",
@@ -70,7 +72,9 @@
       },
       "create": "Create",
       "created": "User created",
-      "createdMessage": "User created succesfully"
+      "createdMessage": "User created succesfully",
+      "failed": "Creation failed",
+      "failedMessage": "User creation failed"
     },
     "subscription": {
       "newPostButton": "Create email post",
@@ -86,6 +90,24 @@
       "removedMessage": "Item successfully removed",
       "rejected": "Rejected",
       "rejectedMessage": "Operation rejected"
+    },
+    "validations": {
+      "emailRequired": "Email is required.",
+      "invalidEmailFormat": "Invalid email format.",
+      "passwordRequired": "Password is required.",
+      "passwordTooShort": "Password must be at least 10 characters long.",
+      "passwordMissingNumber": "Password must contain at least one number.",
+      "passwordMissingSpecial": "Password must contain at least one special character.",
+      "firstNameRequired": "First name is required.",
+      "firstNameLength": "Login name must be between 2 and 20 characters.",
+      "firstNameInvalidCharacters": "Login name can only contain letters, numbers, periods, underscores, and hyphens.",
+      "surnameRequired": "Surname is required.",
+      "surnameLength": "Surname must be between 2 and 30 characters.",
+      "surnameInvalidCharacters": "Surname contains invalid characters.",
+      "roleRequired": "Role is required.",
+      "roleInvalid": "Selected role is not valid. Valid roles are: Admin, Editor, User.",
+      "statusRequired": "Status is required.",
+      "statusInvalid": "Selected status is not valid. Valid status is: Active or Inactive."
     }
   }
 }

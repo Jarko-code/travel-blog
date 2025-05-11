@@ -11,7 +11,8 @@
       "images": "Obrázky",
       "subscribers": "Odberatelia",
       "newEmailPost": "Nový email",
-      "settingsAndProfile": "Nastavenia a profil"
+      "settingsAndProfile": "Nastavenia a profil",
+      "newUser": "Nový užívateľ"
     },
     "default": {
       "notFoundButton": "Späť na predchádzjúcu stránku",
@@ -63,6 +64,7 @@
         "active": "Aktívny",
         "inActive": "Deaktivovaný"
       },
+      "password": "Heslo",
       "positions": {
         "developer": "Developer",
         "designer": "Dizajnér",
@@ -70,7 +72,9 @@
       },
       "create": "Vytvoriť",
       "created": "Užívateľ vytvorený",
-      "createdMessage": "Užívateľ úspešne vytvorený"
+      "createdMessage": "Užívateľ úspešne vytvorený",
+      "failed": "Vytváranie neúspešné",
+      "failedMessage": "Vytváranie užívateľa zhlyhalo"
     },
     "subscription": {
       "newPostButton": "Výtvoriť nový email",
@@ -86,6 +90,24 @@
       "removedMessage": "Položka úspešne vymazaná",
       "rejected": "Zrušené",
       "rejectedMessage": "Operácia zrušená"
+    },
+    "validations": {
+      "emailRequired": "Email je povinný.",
+      "invalidEmailFormat": "Neplatný formát emailu.",
+      "passwordRequired": "Heslo je povinné.",
+      "passwordTooShort": "Heslo musí mať aspoň 10 znakov.",
+      "passwordMissingNumber": "Heslo musí obsahovať aspoň jedno číslo.",
+      "passwordMissingSpecial": "Heslo musí obsahovať aspoň jeden špeciálny znak.",
+      "firstNameRequired": "Meno je povinné.",
+      "firstNameLength": "Prihlasovacie meno musí mať od 2 do 20 znakov.",
+      "firstNameInvalidCharacters": "Prihlasovacie meno môže obsahovať iba písmená, čísla, bodky, podčiarkovníky a pomlčky.",
+      "surnameRequired": "Priezvisko je povinné.",
+      "surnameLength": "Priezvisko musí mať od 2 do 30 znakov.",
+      "surnameInvalidCharacters": "Priezvisko obsahuje neplatné znaky.",
+      "roleRequired": "Rola je povinná.",
+      "roleInvalid": "Zvolená rola nie je platná. Platné role sú: Admin, Editor, User.",
+      "statusRequired": "Stav je povinný.",
+      "statusInvalid": "Vybraný stav nie je platný. Platný stav je: Aktívny alebo Neaktívny."
     }
   }
 }

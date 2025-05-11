@@ -1,67 +1,102 @@
 <template>
-  <Form :formData="formModel" :validateOnValueUpdate="true" :validateOnBlur="true">
+  <Form
+    v-slot="$form"
+    :formData="formModel"
+    :validateOnValueUpdate="true"
+    :validateOnBlur="true"
+    :resolver="resolver"
+    ref="userFormRef"
+  >
     <div class="flex justify-between items-start gap-8">
       <!-- Form fields -->
       <div class="grid grid-cols-3 gap-4 flex-1">
         <!-- User fields -->
-        <InputGroup v-for="field in userFields" :key="field.name">
-          <InputGroupAddon>
-            <i class="pi" :class="field.icon"></i>
-          </InputGroupAddon>
-          <IftaLabel>
-            <Select
-              v-if="['role', 'accountStatus', 'position'].includes(field.name)"
-              :id="field.name"
-              :options="getOptions(field.name)"
-              v-model="formModel[field.name]"
-              :disabled="!isEditing"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Select"
-              class="w-full"
-              variant="filled"
-            />
-            <InputText
-              v-else
-              :id="field.name"
-              :name="field.name"
-              type="text"
-              v-model="formModel[field.name]"
-              :disabled="!isEditing"
-              variant="filled"
-            />
-            <label :for="field.name">{{ t(`admin.users.${field.name}`) }}</label>
-            <InputGroupAddon v-if="field.name === 'personalNumber' && isRegistration">
-              <Button
-                icon="pi pi-refresh"
-                @click="generatePersonalNumber"
-                severity="secondary"
-                rounded
-                text
-                size="small"
-                class="p-0 m-0"
-              />
+        <div v-for="field in userFields" :key="field.name">
+          <InputGroup>
+            <InputGroupAddon>
+              <i class="pi" :class="field.icon"></i>
             </InputGroupAddon>
-          </IftaLabel>
-        </InputGroup>
+            <IftaLabel>
+              <Select
+                v-if="['role', 'accountStatus', 'position'].includes(field.name)"
+                :id="field.name"
+                :name="field.name"
+                :options="getOptions(field.name)"
+                v-model="formModel[field.name]"
+                :disabled="!isEditing"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="Select"
+                class="w-full"
+                variant="filled"
+              />
+              <InputText
+                v-else
+                :id="field.name"
+                :name="field.name"
+                type="text"
+                v-model="formModel[field.name]"
+                :disabled="!isEditing"
+                variant="filled"
+              />
+              <label :for="field.name">{{ t(`admin.users.${field.name}`) }}</label>
+              <InputGroupAddon v-if="field.name === 'personalNumber' && isRegistration">
+                <Button
+                  icon="pi pi-refresh"
+                  @click="generatePersonalNumber"
+                  severity="secondary"
+                  rounded
+                  text
+                  size="small"
+                  class="p-0 m-0"
+                />
+              </InputGroupAddon>
+            </IftaLabel>
+          </InputGroup>
+          <Message
+            v-if="
+              ['name', 'surname', 'email', 'role', 'accountStatus'].includes(field.name) &&
+              $form[field.name]?.invalid
+            "
+            severity="error"
+            size="small"
+            variant="simple"
+            class="mt-1"
+          >
+            {{ $form[field.name].error.message }}
+          </Message>
+        </div>
 
         <!-- Password field (only during registration) -->
-        <InputGroup v-if="isRegistration">
-          <InputGroupAddon>
-            <i class="pi pi-lock"></i>
-          </InputGroupAddon>
-          <IftaLabel>
-            <Password
-              id="password"
-              v-model="formModel.password"
-              :disabled="!isEditing"
-              variant="filled"
-              toggleMask
-              class="w-full"
-            />
-            <label for="password">password</label>
-          </IftaLabel>
-        </InputGroup>
+        <div>
+          <InputGroup>
+            <InputGroupAddon>
+              <i class="pi pi-lock"></i>
+            </InputGroupAddon>
+            <IftaLabel>
+              <Password
+                id="password"
+                name="password"
+                v-model="formModel.password"
+                :disabled="!isEditing"
+                variant="filled"
+                toggleMask
+                class="w-full"
+                v-bind="$attrs"
+              />
+              <label for="password">{{ t('admin.users.password') }}</label>
+            </IftaLabel>
+          </InputGroup>
+          <Message
+            v-if="$form.password?.invalid"
+            severity="error"
+            size="small"
+            variant="simple"
+            class="mt-1"
+          >
+            {{ $form.password.error.message }}
+          </Message>
+        </div>
       </div>
 
       <!-- Profile Picture -->
@@ -111,11 +146,11 @@
 </template>
 
 <script setup>
-import { computed, toRefs } from 'vue'
+import { computed, toRefs, defineExpose, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useValidators } from '@/composables/useValidations'
 
 const props = defineProps({
-  formModel: Object,
   isEditing: Boolean,
   isRegistration: {
     type: Boolean,
@@ -123,7 +158,9 @@ const props = defineProps({
   },
 })
 
-const { formModel, isEditing, isRegistration } = toRefs(props)
+const formModel = defineModel('formModel')
+
+const { isEditing, isRegistration } = toRefs(props)
 
 const { t } = useI18n()
 
@@ -161,6 +198,11 @@ const positionOptions = computed(() => [
   { label: t('admin.users.positions.qaEngineer'), value: 'QA Engineer' },
 ])
 
+const userFormRef = ref()
+defineExpose({
+  validate: () => userFormRef.value.validate?.(),
+})
+
 const getOptions = (fieldName) => {
   switch (fieldName) {
     case 'role':
@@ -175,7 +217,41 @@ const getOptions = (fieldName) => {
 }
 
 const generatePersonalNumber = () => {
-  const randomNumber = Math.floor(100000 + Math.random() * 900000)
-  formModel.value.personalNumber = randomNumber.toString()
+  const randomNumber = Math.floor(100000 + Math.random() * 900000).toString()
+  formModel.value.personalNumber = randomNumber
+}
+
+const {
+  validateEmail,
+  validatePassword,
+  validateFirstName,
+  validateSurname,
+  validateRole,
+  validateStatus,
+} = useValidators()
+
+const resolver = ({ values }) => {
+  const errors = {}
+  console.log('ALL VALUES:', values)
+
+  const emailError = validateEmail(values.email)
+  if (emailError) errors.email = [{ message: emailError }]
+
+  const passwordError = validatePassword(values.password)
+  if (passwordError) errors.password = [{ message: passwordError }]
+
+  const firsNameError = validateFirstName(values.name)
+  if (firsNameError) errors.name = [{ message: firsNameError }]
+
+  const surnameError = validateSurname(values.surname)
+  if (surnameError) errors.surname = [{ message: surnameError }]
+
+  const roleError = validateRole(values.role)
+  if (roleError) errors.role = [{ message: roleError }]
+
+  const statusError = validateStatus(values.accountStatus)
+  if (statusError) errors.accountStatus = [{ message: statusError }]
+
+  return { errors, valid: Object.keys(errors).length === 0 }
 }
 </script>

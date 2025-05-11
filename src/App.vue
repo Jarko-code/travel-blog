@@ -51,6 +51,7 @@ const updateDocumentTitle = () => {
     [ROUTE_NAMES.subscriptionsPage]: `Admin | ${t('admin.documentTitle.subscribers')}`,
     [ROUTE_NAMES.newEmailPost]: `Admin | ${t('admin.documentTitle.newEmailPost')}`,
     [ROUTE_NAMES.settingsPage]: `Admin | ${t('admin.documentTitle.settingsAndProfile')}`,
+    [ROUTE_NAMES.newUser]: `Admin | ${t('admin.documentTitle.newUser')}`,
   }
 
   if (titles[route.name]) {

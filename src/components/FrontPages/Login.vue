@@ -43,7 +43,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useAlertStore } from '@/stores/alertStore'
-import { validateEmail, validatePassword } from '@/composables/validations'
+import { useValidators } from '@/composables/useValidations'
 import { useRoute, useRouter } from 'vue-router'
 import { ROUTE_NAMES } from '@/router/routeNames'
 import { useAuthStore } from '@/stores/authStore'
@@ -52,6 +52,7 @@ const route = useRoute()
 const router = useRouter()
 
 const alert = useAlertStore()
+const { validateEmail, validatePassword } = useValidators()
 
 const formData = reactive({
   email: '',

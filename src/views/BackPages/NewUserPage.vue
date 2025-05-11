@@ -9,11 +9,16 @@
     />
   </div>
   <Divider />
-  <UserForm :formModel="newUser" :isEditing="true" :isRegistration="true" />
+  <UserForm
+    v-model:formModel="newUser"
+    :isEditing="true"
+    :isRegistration="true"
+    ref="userFormRef"
+  />
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import { useAlertStore } from '@/stores/alertStore'
@@ -25,9 +30,6 @@ const alert = useAlertStore()
 const { t } = useI18n()
 
 const userStore = useUserStore()
-
-// pridat validaciu
-// pridat i18n
 
 const newUser = reactive({
   personalNumber: '',
@@ -48,12 +50,21 @@ const newUser = reactive({
   },
 })
 
+const userFormRef = ref()
+
 const submitUser = async () => {
-  const user = await userStore.addNewUser(newUser)
-  alert.success(t('admin.users.created'), t('admin.users.createdMessage'))
-
-  const userId = user._id
-
-  router.push({ name: ROUTE_NAMES.userDetail, params: { id: userId } })
+  const result = await userFormRef.value.validate()
+  if (result.valid) {
+    try {
+      const user = await userStore.addNewUser({ ...newUser })
+      alert.success(t('admin.users.created'), t('admin.users.createdMessage'))
+      const userId = user._id
+      router.push({ name: ROUTE_NAMES.userDetail, params: { id: userId } })
+    } catch (error) {
+      alert.error(t('admin.users.failed'), t('admin.users.failedMessage'))
+    }
+  } else {
+    alert.error(t('admin.users.failed'), t('admin.users.failedMessage'))
+  }
 }
 </script>
