@@ -40,23 +40,13 @@
                 variant="filled"
               />
               <label :for="field.name">{{ t(`admin.users.${field.name}`) }}</label>
-              <InputGroupAddon v-if="field.name === 'personalNumber' && isRegistration">
-                <Button
-                  icon="pi pi-refresh"
-                  @click="generatePersonalNumber"
-                  severity="secondary"
-                  rounded
-                  text
-                  size="small"
-                  class="p-0 m-0"
-                />
-              </InputGroupAddon>
             </IftaLabel>
           </InputGroup>
           <Message
             v-if="
-              ['name', 'surname', 'email', 'role', 'accountStatus'].includes(field.name) &&
-              $form[field.name]?.invalid
+              ['personalNumber', 'name', 'surname', 'email', 'role', 'accountStatus'].includes(
+                field.name,
+              ) && $form[field.name]?.invalid
             "
             severity="error"
             size="small"
@@ -146,7 +136,7 @@
 </template>
 
 <script setup>
-import { computed, toRefs, defineExpose, ref } from 'vue'
+import { computed, toRefs, defineExpose, ref, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useValidators } from '@/composables/useValidations'
 
@@ -216,11 +206,6 @@ const getOptions = (fieldName) => {
   }
 }
 
-const generatePersonalNumber = () => {
-  const randomNumber = Math.floor(100000 + Math.random() * 900000).toString()
-  formModel.value.personalNumber = randomNumber
-}
-
 const {
   validateEmail,
   validatePassword,
@@ -228,11 +213,12 @@ const {
   validateSurname,
   validateRole,
   validateStatus,
+  validatePersonalNumber,
 } = useValidators()
 
 const resolver = ({ values }) => {
+  console.log('Before Validation:', values)
   const errors = {}
-  console.log('ALL VALUES:', values)
 
   const emailError = validateEmail(values.email)
   if (emailError) errors.email = [{ message: emailError }]
@@ -251,6 +237,11 @@ const resolver = ({ values }) => {
 
   const statusError = validateStatus(values.accountStatus)
   if (statusError) errors.accountStatus = [{ message: statusError }]
+
+  const personalNumberError = validatePersonalNumber(values.personalNumber)
+  if (personalNumberError) errors.personalNumber = [{ message: personalNumberError }]
+
+  console.log('After Validation:', values)
 
   return { errors, valid: Object.keys(errors).length === 0 }
 }

@@ -107,7 +107,9 @@
       "roleRequired": "Rola je povinná.",
       "roleInvalid": "Zvolená rola nie je platná. Platné role sú: Admin, Editor, User.",
       "statusRequired": "Stav je povinný.",
-      "statusInvalid": "Vybraný stav nie je platný. Platný stav je: Aktívny alebo Neaktívny."
+      "statusInvalid": "Vybraný stav nie je platný. Platný stav je: Aktívny alebo Neaktívny.",
+      "personalNumberRequired": "Osobné číslo je povinné.",
+      "personalNumberInvalid": "Osobné číslo musí mať presne 6 číslic."
     }
   }
 }

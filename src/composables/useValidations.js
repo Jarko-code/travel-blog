@@ -68,6 +68,18 @@ export const useValidators = () => {
     return null
   }
 
+  const validatePersonalNumber = (value) => {
+    if (!value || typeof value !== 'string') {
+      return t('admin.validations.personalNumberRequired')
+    }
+
+    if (!/^\d{6}$/.test(value)) {
+      return t('admin.validations.personalNumberInvalid')
+    }
+
+    return null
+  }
+
   return {
     validateEmail,
     validatePassword,
@@ -76,5 +88,6 @@ export const useValidators = () => {
     validateSurname,
     validateRole,
     validateStatus,
+    validatePersonalNumber,
   }
 }

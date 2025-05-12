@@ -107,7 +107,9 @@
       "roleRequired": "Role is required.",
       "roleInvalid": "Selected role is not valid. Valid roles are: Admin, Editor, User.",
       "statusRequired": "Status is required.",
-      "statusInvalid": "Selected status is not valid. Valid status is: Active or Inactive."
+      "statusInvalid": "Selected status is not valid. Valid status is: Active or Inactive.",
+      "personalNumberRequired": "Personal number is required.",
+      "personalNumberInvalid": "Personal number must be exactly 6 digits."
     }
   }
 }

@@ -19,9 +19,9 @@ const UserSchema = new mongoose.Schema(
     },
     personalNumber: { type: String, required: true },
     address: {
-      street: { type: String, required: true },
-      postcode: { type: String, required: true },
-      city: { type: String, required: true },
+      street: { type: String },
+      postcode: { type: String },
+      city: { type: String },
     },
     profilePicture: { type: String },
     accountStatus: {
