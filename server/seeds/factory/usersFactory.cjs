@@ -1,10 +1,7 @@
 const mongoose = require('mongoose')
 const { faker } = require('@faker-js/faker')
 const bcrypt = require('bcryptjs')
-const User = require('../../models/user')
-
-const dotenv = require('dotenv')
-dotenv.config({ path: '../.env' })
+const User = require('../../models/user.cjs')
 
 async function usersFactory() {
   try {

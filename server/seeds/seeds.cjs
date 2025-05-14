@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const { connectDB, clearIndexes, checkDBConnection } = require('../config/db')
-const seedSubscriptions = require('./factory/subscriptionsFactory')
-const seedUsers = require('./factory/usersFactory')
+const { connectDB, clearIndexes, checkDBConnection } = require('../config/db.cjs')
+const seedSubscriptions = require('./factory/subscriptionsFactory.cjs')
+const seedUsers = require('./factory/usersFactory.cjs')
 
 const runSeeds = async () => {
   try {

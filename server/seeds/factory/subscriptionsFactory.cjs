@@ -1,9 +1,6 @@
 const mongoose = require('mongoose')
 const { faker } = require('@faker-js/faker')
-const Subscription = require('../../models/subscription')
-
-const dotenv = require('dotenv')
-dotenv.config({ path: '../.env' })
+const Subscription = require('../../models/subscription.cjs')
 
 async function subscriptionsFactory() {
   try {

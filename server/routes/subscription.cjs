@@ -1,5 +1,5 @@
 const express = require('express')
-const Subscription = require('../models/subscription')
+const Subscription = require('../models/subscription.cjs')
 
 const router = express.Router()
 
