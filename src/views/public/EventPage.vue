@@ -1,5 +1,5 @@
 <template>
-  <div>Gallery</div>
+  <div>Events public</div>
 </template>
 
 <script setup></script>
