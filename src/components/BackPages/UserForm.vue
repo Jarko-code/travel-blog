@@ -136,7 +136,7 @@
 </template>
 
 <script setup>
-import { computed, toRefs, defineExpose, ref, nextTick } from 'vue'
+import { computed, toRefs, ref, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useValidators } from '@/composables/useValidations'
 
