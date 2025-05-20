@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const { faker } = require('@faker-js/faker')
-const Subscription = require('../../models/subscription.cjs')
+import mongoose from 'mongoose'
+import { faker } from '@faker-js/faker'
+import Subscription from '../../models/subscription.js'
 
 async function subscriptionsFactory() {
   try {
@@ -27,5 +27,4 @@ async function subscriptionsFactory() {
   }
 }
 
-// Export so you can import elsewhere
-module.exports = subscriptionsFactory
+export default subscriptionsFactory

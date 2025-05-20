@@ -1,5 +1,7 @@
-const mongoose = require('mongoose')
-const AutoIncrement = require('mongoose-sequence')(mongoose)
+import mongoose from 'mongoose'
+import sequence from 'mongoose-sequence'
+
+const AutoIncrement = sequence(mongoose)
 
 const SubscriptionSchema = new mongoose.Schema(
   {
@@ -15,4 +17,5 @@ SubscriptionSchema.plugin(AutoIncrement, {
   id: 'subscriptions',
 })
 
-module.exports = mongoose.model('Subscription', SubscriptionSchema)
+const Subscription = mongoose.model('Subscription', SubscriptionSchema)
+export default Subscription

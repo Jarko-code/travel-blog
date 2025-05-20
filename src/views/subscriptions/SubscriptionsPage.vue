@@ -84,7 +84,6 @@ const { t } = useI18n()
 
 onMounted(async () => {
   await subscriptionStore.getAllSubscriptions()
-  // console.log(subscriptions.value) // Access and log the reactive subscriptions array
 })
 
 const removeSubscription = async (id) => {

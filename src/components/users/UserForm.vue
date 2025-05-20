@@ -217,7 +217,6 @@ const {
 } = useValidators()
 
 const resolver = ({ values }) => {
-  console.log('Before Validation:', values)
   const errors = {}
 
   const emailError = validateEmail(values.email)
@@ -240,8 +239,6 @@ const resolver = ({ values }) => {
 
   const personalNumberError = validatePersonalNumber(values.personalNumber)
   if (personalNumberError) errors.personalNumber = [{ message: personalNumberError }]
-
-  console.log('After Validation:', values)
 
   return { errors, valid: Object.keys(errors).length === 0 }
 }

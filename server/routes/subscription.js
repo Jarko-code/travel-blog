@@ -1,5 +1,5 @@
-const express = require('express')
-const Subscription = require('../models/subscription.cjs')
+import express from 'express'
+import Subscription from '../models/subscription.js'
 
 const router = express.Router()
 
@@ -50,4 +50,4 @@ router.delete('/subscriptions/:id', async (req, res) => {
   }
 })
 
-module.exports = router
+export default router

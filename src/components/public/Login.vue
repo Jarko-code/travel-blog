@@ -15,25 +15,25 @@
           <InputIcon class="pi pi-inbox" />
           <InputText name="email" type="text" placeholder="Email" v-model="formData.email" fluid />
         </IconField>
-        <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">{{
-          $form.email.error.message
-        }}</Message>
+        <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">
+          {{ $form.email.error.message }}
+        </Message>
       </div>
       <div class="mb-8">
         <IconField class="mb-2.5">
           <InputIcon class="pi pi-lock" />
-          <InputText
+          <Password
             name="password"
-            :type="isMasked ? 'password' : 'text'"
             placeholder="Password"
             fluid
+            toggleMask
+            :feedback="false"
             v-model="formData.password"
           />
-          <InputIcon @click="toggleMask" :class="isMasked ? 'pi pi-eye' : 'pi pi-eye-slash'" />
         </IconField>
-        <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{
-          $form.password.error.message
-        }}</Message>
+        <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">
+          {{ $form.password.error.message }}
+        </Message>
       </div>
       <Button type="submit" severity="danger" label="Login" />
     </Form>
@@ -58,12 +58,6 @@ const formData = reactive({
   email: '',
   password: '',
 })
-
-const isMasked = ref(true)
-
-const toggleMask = () => {
-  isMasked.value = !isMasked.value
-}
 
 const resolver = ({ values }) => {
   const errors = {}

@@ -1,5 +1,5 @@
-const express = require('express')
-const User = require('../models/user.cjs')
+import express from 'express'
+import User from '../models/user.js'
 
 const router = express.Router()
 
@@ -33,7 +33,6 @@ router.put('/users/:id', async (req, res) => {
     const { id } = req.params
     const updateData = req.body
 
-    // Find and update the user by ID
     const updatedUser = await User.findByIdAndUpdate(id, updateData, { new: true })
 
     if (!updatedUser) {
@@ -60,4 +59,4 @@ router.delete('/users/:id', async (req, res) => {
   }
 })
 
-module.exports = router
+export default router

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-const connectDB = async () => {
+export const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI)
     console.log('MongoDB Connected')
@@ -10,8 +10,8 @@ const connectDB = async () => {
   }
 }
 
-// Clear all indexex in all tables and prevent from dublicite keys
-const clearIndexes = async () => {
+// Clear all indexes in all collections
+export const clearIndexes = async () => {
   try {
     const db = mongoose.connection.db
     const collections = await db.collections()
@@ -28,17 +28,11 @@ const clearIndexes = async () => {
 }
 
 // Check if DB is connected
-const checkDBConnection = () => {
+export const checkDBConnection = () => {
   if (mongoose.connection.readyState === 1) {
     console.log('Database is connected and ready.')
   } else {
     console.error('Database is not connected.')
     process.exit(1)
   }
-}
-
-module.exports = {
-  connectDB,
-  clearIndexes,
-  checkDBConnection,
 }

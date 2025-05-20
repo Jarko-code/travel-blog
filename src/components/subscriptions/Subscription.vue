@@ -67,8 +67,7 @@
         />
 
         <span class="w-full">
-          I consent to my personal information being processed in accordance with The Broke
-          Backpacker’s 
+          I consent to my personal information being processed in accordance with The Travel Blog 
           <span class="font-bold text-red-500"> Privacy Policy </span>
         </span>
         <Button

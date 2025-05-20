@@ -1,7 +1,7 @@
-const express = require('express')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const User = require('../models/user.cjs')
+import express from 'express'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import User from '../models/user.js'
 
 const router = express.Router()
 const JWT_SECRET = process.env.JWT_SECRET
@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
 
   try {
     // Validate password
-    const passwordRegex = /^(?=.*[!@#$%^&*+-]).{10,}$/
+    const passwordRegex = /^(?=.*[!@#$%^&*+\-]).{10,}$/
     if (!passwordRegex.test(password)) {
       return res.status(400).json({
         message:
@@ -84,19 +84,18 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({ email })
-
-  if (user.accountStatus === 'Disabled') {
-    return res.status(403).json({ message: 'Account is disabled' })
-  }
-
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' })
   }
 
   try {
     const user = await User.findOne({ email })
+
     if (!user) return res.status(400).json({ message: 'Invalid email' })
+
+    if (user.accountStatus === 'Disabled') {
+      return res.status(403).json({ message: 'Account is disabled' })
+    }
 
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) return res.status(400).json({ message: 'Invalid password' })
@@ -106,7 +105,7 @@ router.post('/login', async (req, res) => {
       token,
       user: {
         id: user._id,
-        username: user.name + ' ' + user.surname,
+        username: `${user.name} ${user.surname}`,
         email: user.email,
         role: user.role,
       },
@@ -130,7 +129,7 @@ router.get('/me', async (req, res) => {
     res.json({
       user: {
         id: user._id,
-        username: user.name + ' ' + user.surname,
+        username: `${user.name} ${user.surname}`,
         email: user.email,
         role: user.role,
       },
@@ -155,4 +154,4 @@ router.post('/logout', (req, res) => {
   }
 })
 
-module.exports = router
+export default router

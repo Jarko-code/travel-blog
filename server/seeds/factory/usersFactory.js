@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const { faker } = require('@faker-js/faker')
-const bcrypt = require('bcryptjs')
-const User = require('../../models/user.cjs')
+import mongoose from 'mongoose'
+import { faker } from '@faker-js/faker'
+import bcrypt from 'bcryptjs'
+import User from '../../models/user.js'
 
 async function usersFactory() {
   try {
@@ -41,7 +41,7 @@ async function usersFactory() {
       console.log('Test user already exists, skipping creation.')
     }
 
-    // Genereta fake users
+    // Generate fake users
     const userPromises = []
     const roles = ['Admin', 'Editor', 'User']
     const statuses = ['Active', 'Inactive']
@@ -79,4 +79,4 @@ async function usersFactory() {
   }
 }
 
-module.exports = usersFactory
+export default usersFactory
