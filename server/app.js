@@ -2,9 +2,9 @@ import express from 'express'
 import { connectDB } from './config/db.js'
 import cors from 'cors'
 
-import authRoutes from './routes/auth.js'
-import subscriptionRoutes from './routes/subscription.js'
-import userRoutes from './routes/users.js'
+import authRoutes from './routes/authRoutes.js'
+import subscriptionRoutes from './routes/subscriptionRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 connectDB()
 

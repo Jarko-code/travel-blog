@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { faker } from '@faker-js/faker'
 import bcrypt from 'bcryptjs'
-import User from '../../models/user.js'
+import User from '../../models/userModel.js'
 
 async function usersFactory() {
   try {

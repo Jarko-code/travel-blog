@@ -1,10 +1,6 @@
-import express from 'express'
-import Subscription from '../models/subscription.js'
+import Subscription from '../models/subscriptionModel.js'
 
-const router = express.Router()
-
-// Create a new subscription
-router.post('/subscriptions', async (req, res) => {
+export const createSubscription = async (req, res) => {
   try {
     const { firstName, email } = req.body
 
@@ -24,30 +20,28 @@ router.post('/subscriptions', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' })
   }
-})
+}
 
-// Get all subscriptions
-router.get('/subscriptions', async (req, res) => {
+export const getAllSubscriptions = async (req, res) => {
   try {
     const subscriptions = await Subscription.find()
     res.status(200).json(subscriptions)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
-})
+}
 
-// Delete a subscription by ID
-router.delete('/subscriptions/:id', async (req, res) => {
+export const deleteSubscription = async (req, res) => {
   try {
     const { id } = req.params
     const deletedSubscription = await Subscription.findByIdAndDelete(id)
+
     if (!deletedSubscription) {
       return res.status(404).json({ message: 'Subscription not found' })
     }
+
     res.status(200).json({ message: 'Subscription deleted successfully' })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
-})
-
-export default router
+}

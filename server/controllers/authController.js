@@ -1,13 +1,11 @@
-import express from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import User from '../models/user.js'
+import User from '../models/userModel.js'
 
-const router = express.Router()
 const JWT_SECRET = process.env.JWT_SECRET
+const tokenBlacklist = new Set()
 
-// Register User
-router.post('/register', async (req, res) => {
+export const registerUser = async (req, res) => {
   const {
     name,
     surname,
@@ -24,7 +22,6 @@ router.post('/register', async (req, res) => {
   } = req.body
 
   try {
-    // Validate password
     const passwordRegex = /^(?=.*[!@#$%^&*+\-]).{10,}$/
     if (!passwordRegex.test(password)) {
       return res.status(400).json({
@@ -33,11 +30,9 @@ router.post('/register', async (req, res) => {
       })
     }
 
-    // Check if user already exists
     let user = await User.findOne({ email })
     if (user) return res.status(400).json({ message: 'User already exists' })
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10)
     user = new User({
       name,
@@ -54,10 +49,8 @@ router.post('/register', async (req, res) => {
       accountStatus,
     })
 
-    // Save new user
     await user.save()
 
-    // Return the newly created user object with the response
     res.status(201).json({
       message: 'User registered successfully',
       user: {
@@ -78,10 +71,9 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
-})
+}
 
-// Login User
-router.post('/login', async (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body
 
   if (!email || !password) {
@@ -92,7 +84,6 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email })
 
     if (!user) return res.status(400).json({ message: 'Invalid email' })
-
     if (user.accountStatus === 'Disabled') {
       return res.status(403).json({ message: 'Account is disabled' })
     }
@@ -101,6 +92,7 @@ router.post('/login', async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid password' })
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '3h' })
+
     res.json({
       token,
       user: {
@@ -113,13 +105,16 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
-})
+}
 
-// Protected Route
-router.get('/me', async (req, res) => {
+export const getCurrentUser = async (req, res) => {
   try {
     const token = req.headers['authorization']
     if (!token) return res.status(401).json({ message: 'Unauthorized' })
+
+    if (tokenBlacklist.has(token)) {
+      return res.status(401).json({ message: 'Token is blacklisted' })
+    }
 
     const decoded = jwt.verify(token, JWT_SECRET)
     const user = await User.findById(decoded.id)
@@ -137,21 +132,16 @@ router.get('/me', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
-})
+}
 
-const tokenBlacklist = new Set()
-
-// Logout User
-router.post('/logout', (req, res) => {
+export const logoutUser = (req, res) => {
   try {
     const token = req.headers['authorization']
     if (!token) return res.status(400).json({ message: 'No token provided' })
 
-    tokenBlacklist.add(token) // Add token to blacklist
+    tokenBlacklist.add(token)
     res.json({ message: 'Logged out successfully' })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
-})
-
-export default router
+}
