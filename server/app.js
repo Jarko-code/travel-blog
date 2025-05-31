@@ -5,6 +5,7 @@ import cors from 'cors'
 import authRoutes from './routes/authRoutes.js'
 import subscriptionRoutes from './routes/subscriptionRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import galleryRoutes from './routes/galleryRoutes.js'
 
 connectDB()
 
@@ -20,5 +21,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/auth', authRoutes)
 app.use('/api', subscriptionRoutes)
 app.use('/api', userRoutes)
+app.use('/api', galleryRoutes)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
