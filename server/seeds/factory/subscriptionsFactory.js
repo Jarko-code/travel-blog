@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import { faker } from '@faker-js/faker'
 import Subscription from '../../models/subscriptionModel.js'
 

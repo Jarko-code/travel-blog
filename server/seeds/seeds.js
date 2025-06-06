@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import { connectDB, clearIndexes, checkDBConnection } from '../config/db.js'
 import seedSubscriptions from './factory/subscriptionsFactory.js'
 import seedUsers from './factory/usersFactory.js'
+import seedGalleries from './factory/galleryFactory.js'
 
 const runSeeds = async () => {
   try {
@@ -11,6 +12,7 @@ const runSeeds = async () => {
 
     await seedSubscriptions()
     await seedUsers()
+    await seedGalleries()
 
     console.log('All seeds have been successfully added to the database.')
   } catch (err) {

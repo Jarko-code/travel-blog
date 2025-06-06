@@ -3,7 +3,6 @@
 git clone https://github.com/Jarko-code/travel-blog.git
 
 npm install
-npm run dev
 
 ## For server deploy
 
@@ -16,6 +15,10 @@ open compass -> add new connection -> change URI field to mongodb://localhost:27
 
 nodemon app.js
 
+## Run app
+
+From root run npm run dev - it will run server and client together
+
 ## DB test
 
 install this extension for Visual studio code https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode
@@ -26,7 +29,7 @@ ask me for invitation and you will get API tests
 
 ## Seeds
 
-if you want to seed the DB, go to seed and run node seed.js
+if you want to seed the DB, from root run npm run seed
 the output should be like this: (depends on collections count)
 
 MongoDB Connected

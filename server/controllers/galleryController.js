@@ -1,5 +1,7 @@
 import Gallery from '../models/galleryModel.js'
 import slugify from 'slugify'
+import fs from 'fs'
+import path from 'path'
 
 // Helper na vytvorenie absolútnych URL obrázkov
 const getAbsoluteImageUrls = (req, relativePaths) => {
@@ -136,5 +138,38 @@ export const deleteGallery = async (req, res) => {
   } catch (error) {
     console.error('Error deleting gallery:', error)
     res.status(500).json({ message: 'Server error while deleting gallery.' })
+  }
+}
+
+export const deleteGalleryImage = async (req, res) => {
+  try {
+    const { id } = req.params
+    const filePath = req.query.file
+
+    if (!filePath) {
+      return res.status(400).json({ message: 'No file path provided.' })
+    }
+
+    const gallery = await Gallery.findById(id)
+    if (!gallery) {
+      return res.status(404).json({ message: 'Gallery not found.' })
+    }
+
+    // Odstráň cestu z pola v DB
+    gallery.images = gallery.images.filter((img) => !img.includes(path.basename(filePath)))
+    await gallery.save()
+
+    // Odstráň fyzicky súbor
+    const fullPath = path.join(process.cwd(), filePath)
+    fs.unlink(fullPath, (err) => {
+      if (err) {
+        console.error('Error deleting image file:', err)
+      }
+    })
+
+    res.json({ message: 'Image deleted successfully.' })
+  } catch (error) {
+    console.error('Error deleting gallery image:', error)
+    res.status(500).json({ message: 'Server error while deleting image.' })
   }
 }

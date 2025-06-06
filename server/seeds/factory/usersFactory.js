@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import { faker } from '@faker-js/faker'
 import bcrypt from 'bcryptjs'
 import User from '../../models/userModel.js'
